@@ -6,6 +6,7 @@ import SignIn from './Pages/Auth/signin'
 import SignUp from './Pages/Auth/signup'
 import NavBar from './Components/NavBar'
 import Profile from './Pages/Profile'
+import About from './Pages/About'
 
 
 
@@ -21,6 +22,7 @@ function App() {
             <Route path="/signin" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Profile />} /> 
+            <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
   </>
