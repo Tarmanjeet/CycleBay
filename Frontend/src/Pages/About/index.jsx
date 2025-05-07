@@ -1,15 +1,18 @@
 import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './About.css';
 import NavBar from '../../Components/NavBar';
 
-function Profile() {
+function About() {  
     return (
-        <>
-            <NavBar/>
-            <h1>your profile</h1>
-        </>
+    <>
+        <NavBar />
+        <h1>About Page</h1>
+
+    </>
+
     )
 }
 
-export default Profile;
+export default About;

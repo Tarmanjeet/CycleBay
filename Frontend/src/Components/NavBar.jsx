@@ -1,9 +1,26 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
+import './NavBar.css';
 
-export function SignIn() {
+function NavBar() {
     return (
-        <h1>NavBar</h1>
+        <>
+        <header>
+            <div className="navbar">
+                <nav>
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/about">About</Link></li>
+                        <li><Link to="/profile">Profile</Link></li>
+                        <li><Link to="/signup">Register</Link></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        </>
+        
     )
 }
+
+export default NavBar;
