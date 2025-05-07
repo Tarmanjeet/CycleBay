@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 const tokenSecret = process.env.TOKEN_SECRET;
 
-const isAdmin = (req, res, next) => {
+const isSuperAdmin = (req, res, next) => {
     const token = req.header("x-access-token");
 
     if (!token) {
@@ -24,4 +24,4 @@ const isAdmin = (req, res, next) => {
     }
 }
 
-module.exports = isAdmin;
+module.exports = isSuperAdmin;
