@@ -54,7 +54,7 @@ const loginUser=async(req,res)=>{
         type:user.type||0,
         name:user.name
     }
-    const tokenSecret=process.env.token_secret;
+    const tokenSecret=process.env.TOKEN_SECRET;
     jwt.sign(payLoad,tokenSecret,{expiresIn:3600},
         (err,token)=>{
             if(err){
