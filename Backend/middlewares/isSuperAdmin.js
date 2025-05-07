@@ -6,7 +6,7 @@ const isAdmin = (req, res, next) => {
     const token = req.header("x-access-token");
 
     if (!token) {
-        return res.status(403).json({ success: false, message: "No token provided for admin authentication" });
+        return res.status(403).json({ success: false, message: "No token provided for super admin authentication" });
     }
 
     try {
@@ -14,13 +14,13 @@ const isAdmin = (req, res, next) => {
         req.userId = decoded.id;
         req.type = decoded.type;
         req.name = decoded.name;
-        if(type !== "A") {
-            return res.status(403).json({ success: false, message: "You are not an admin"});
+        if(type !== "S") {
+            return res.status(403).json({ success: false, message: "You are not a super admin"});
         }
         next();
     }
     catch (error) {
-        return res.status(401).json({ success: false, message: "Invalid token for admin authentication" });
+        return res.status(401).json({ success: false, message: "Invalid token for super admin authentication" });
     }
 }
 
