@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './signup.css';
 
 const SignUp = () => {
     const [name, setName] = useState('');
@@ -19,8 +20,8 @@ const SignUp = () => {
     };
   
     return (
-      <div>
-        <h1>Sign Up</h1>
+      <div className="container">
+        <h1>Welcome to CycleBay</h1>
         <form onSubmit={handleSubmit}>
             <div>
             <label>Name:</label>
@@ -35,6 +36,7 @@ const SignUp = () => {
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <button type="submit">Sign Up</button>
+          <p>Already have an account? <a href="/signin">Sign In</a></p>
         </form>
       </div>
     );

@@ -12,14 +12,20 @@ const SignIn = () => {
       e.preventDefault();
       try {
         const response = await axios.post('', { email, password });
-        console.log('Response:', response.data);
+        if(response.data.success) {
+          navigate('/'); 
+        } else {
+          alert("Error : " + response.data.message);
+        }
       } catch (error) {
-        console.error('Error:', error.message);
+        console.error("Error : " + error.message);
       }
     };
+
+  
   
     return (
-      <div>
+      <div className="container">
         <h1>Sign In</h1>
         <form onSubmit={handleSubmit}>
           <div>
@@ -31,6 +37,7 @@ const SignIn = () => {
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
           <button type="submit">Sign In</button>
+          <p>Don't have an account? <a href="/signup">Sign Up</a></p>
         </form>
       </div>
     );
