@@ -13,7 +13,11 @@ const SignUp = () => {
       e.preventDefault();
       try {
         const response = await axios.post('', { name, email, password });
-        console.log('Response:', response.data);
+        if(response.data.success) {
+          navigate('/signin'); 
+        } else {
+          alert("Error : " + response.data.message);
+        }
       } catch (error) {
         console.error('Error:', error.message);
       }
