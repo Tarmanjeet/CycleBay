@@ -13,7 +13,7 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('http://localhost:8080/user/register', { name, email, password });
+        const response = await axios.post('http://localhost:6000/user/register', { name, email, password });
         if(response.status === 200) {
           console.log('Response:', response.data);
           alert("User registered successfully");

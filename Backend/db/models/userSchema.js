@@ -19,8 +19,8 @@ const userSchema=new mongoose.Schema({
     },
     type:{
         type:"String",
-        default:"U",
-        enum:["U","A","S"]
+        default:"user",
+        enum:["user","admin","superadmin"]
     },
     createdAt:{
         type:Date,
