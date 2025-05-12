@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import './signup.css';
 
@@ -8,12 +8,17 @@ const SignUp = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
   
     const handleSubmit = async (e) => {
       e.preventDefault();
       try {
-        const response = await axios.post('', { name, email, password });
-        console.log('Response:', response.data);
+        const response = await axios.post('http://localhost:8080/user/register', { name, email, password });
+        if(response.status === 200) {
+          console.log('Response:', response.data);
+          alert("User registered successfully");
+          Navigate('/signin');
+        }
       } catch (error) {
         console.error('Error:', error.message);
       }
