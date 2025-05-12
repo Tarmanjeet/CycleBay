@@ -1,7 +1,9 @@
 const express=require("express");
 const {check}=require("express-validator");
 const {registerUser,loginUser,updateUser,deleteUser}=require("../controllers/user.controller")
-const isAuth=require("../middlewares/isAuth");
+const isAuth=require("../middlewares/authenticate").isAuth;
+const isAdmin=require("../middlewares/authenticate").isAdmin;
+const isSuperAdmin=require("../middlewares/authenticate").isSuperAdmin;
 let userRouter=express.Router();
 
 userRouter.post("/login",[
