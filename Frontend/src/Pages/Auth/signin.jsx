@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import './signin.css';
 
@@ -19,8 +19,8 @@ const SignIn = () => {
     };
   
     return (
-      <div>
-        <h1>Sign In</h1>
+      <div className="container">
+        <h1>Welcome Back</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label>Email:</label>
@@ -30,6 +30,7 @@ const SignIn = () => {
             <label>Password:</label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
+          <div><p>Don't have an account ? <Link to="/signup">Register</Link></p></div>
           <button type="submit">Sign In</button>
         </form>
       </div>

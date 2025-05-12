@@ -1,7 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import './signup.css';
 
 const SignUp = () => {
     const [name, setName] = useState('');
@@ -19,8 +20,8 @@ const SignUp = () => {
     };
   
     return (
-      <div>
-        <h1>Sign Up</h1>
+      <div className="container">
+        <h1>Welcome to CycleBay</h1>
         <form onSubmit={handleSubmit}>
             <div>
             <label>Name:</label>
@@ -34,6 +35,7 @@ const SignUp = () => {
             <label>Password:</label>
             <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
           </div>
+          <div><p>Already have an account ? <Link to="/signin">Login</Link></p></div>
           <button type="submit">Sign Up</button>
         </form>
       </div>
