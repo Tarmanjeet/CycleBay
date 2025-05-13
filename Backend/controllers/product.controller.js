@@ -1,71 +1,93 @@
-let products=require("../db/models/productSchema");
-let mongoose=require("mongoose");
+const products = require("../db/models/productSchema");
+const mongoose = require("mongoose");
+const path = require("path");
 
-let ObjectId = mongoose.Types.ObjectId;
+let getAllProducts = async (req, res) => {
+  try {
+    let allProducts = await products.find();
+    if (allProducts.length === 0) {
+      return res.status(404).sendFile("404.html", { root: process.cwd() });
+    }
+    return res.status(200).json({ success: true, message: "All products fetched successfully", data: allProducts });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
 
-let getAllProducts=async(req,res)=>{
-    let allProducts=await products.find();
-    if(allProducts.length==0){
-        return res.status(404).json({success:false,message:"No products found"});
+let getProductById = async (req, res) => {
+  try {
+    let product = await products.findById(req.params.id);
+    if (!product) {
+      return res.status(404).sendFile("404.html", { root: process.cwd() });
     }
-    return res.status(200).json({success:true,message:"All products fetched successfully",data:allProducts});
-}
+    return res.status(200).json({ success: true, message: "Product fetched successfully", data: product });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
 
-let getProductById=async(req,res)=>{
-    let productId=req.params.id;
-    if (!ObjectId.isValid(productId)) {
-        return res.status(400).json({ success: false, message: "Invalid product ID" });
-    }
-    let product=await products.findById(productId);
-    if(!product){
-        return res.status(404).json({success:false,message:"Product not found"});
-    }
-    return res.status(200).json({success:true,message:"Product fetched successfully",data:product});
-}
+let createProduct = async (req, res) => {
+  try {
+    const body = req.body;
+    const newProduct = new products({
+      name: body.name,
+      desc: body.desc,
+      price: body.price,
+      category: body.category,
+      imgUrl: body.imgUrl,
+      description: body.description,
+      createdBy: req.user.userId
+    });
 
-let createProduct=async(req,res)=>{
-    let body=req.body;
-    let newProduct={
-        name:body.name,
-        desc:body.desc,
-        price:body.price,
-        category:body.category,
-        imgUrl:body.imgUrl
-    }
-    await products.insertOne(newProduct);
-    if(!newProduct.name || !newProduct.desc || !newProduct.price || !newProduct.category){
-        return res.status(400).json({success:false,message:"Please provide all the required fields"});
-    }
-    return res.status(200).json({success:true,message:"Product created successfully",data:newProduct});
-}
+    await newProduct.save();
+    return res.status(200).json({ success: true, message: "Product created successfully", data: newProduct });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
 
-let updateProduct=async(req,res)=>{
-    let productId = req.params.id;
-    let newDesc = req.body.desc;
-    let newPrice = req.body.price;
-    let product = await products.findById(productId)
-    if(newDesc && newDesc != "")
-    {
-        product.desc = newDesc
+let updateProduct = async (req, res) => {
+  try {
+    let product = await products.findById(req.params.id);
+    if (!product) {
+      return res.status(404).sendFile("404.html", { root: process.cwd() });
     }
-    if(newPrice && newPrice > 0)
-    {
-        product.price = newPrice
+
+    if (product.createdBy.toString() !== req.user.userId) {
+      return res.status(403).json({ success: false, message: "You do not own this product" });
     }
-    await product.save()
-    res.status(200).json({success:true,message:"Product Updated successfully"})
-}
 
-let deleteProduct=async(req,res)=>{
-    let productId = req.params.id;
-    await products.deleteOne({_id:new ObjectId(productId)});
-    res.status(200).json({success:true,message:"Product Deletd successfully"});
-}
+    const updates = req.body;
+    Object.assign(product, updates);
+    await product.save();
+    res.status(200).json({ success: true, message: "Product updated successfully", data: product });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
 
-module.exports={
-    getAllProducts,
-    getProductById,
-    createProduct,
-    updateProduct,
-    deleteProduct
-}
+let deleteProduct = async (req, res) => {
+  try {
+    let product = await products.findById(req.params.id);
+    if (!product) {
+      return res.status(404).sendFile("404.html", { root: process.cwd() });
+    }
+
+    if (product.createdBy.toString() !== req.user.userId) {
+      return res.status(403).json({ success: false, message: "You do not own this product" });
+    }
+
+    await products.findByIdAndDelete(req.params.id);
+    res.status(200).json({ success: true, message: "Product deleted successfully" });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+module.exports = {
+  getAllProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct
+};

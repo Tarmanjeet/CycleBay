@@ -1,9 +1,7 @@
 const express=require("express");
 const {check}=require("express-validator");
 const {registerUser,loginUser,updateUser,deleteUser}=require("../controllers/user.controller")
-const isAuth=require("../middlewares/authenticate").isAuth;
-const isAdmin=require("../middlewares/authenticate").isAdmin;
-const isSuperAdmin=require("../middlewares/authenticate").isSuperAdmin;
+const { isAuth , isAdmin , isSuperAdmin } =require("../middlewares/authenticate");
 let userRouter=express.Router();
 
 userRouter.post("/login",[
@@ -17,8 +15,8 @@ userRouter.post("/register",[
     check("password").notEmpty()
 ],registerUser);
 
-userRouter.patch("/update/:id",updateUser);
+userRouter.patch("/update/:id", isAuth , updateUser);
 
-userRouter.delete("/delete/:id",deleteUser);
+userRouter.delete("/delete/:id",isAuth , isSuperAdmin , deleteUser);
 
 module.exports=userRouter;

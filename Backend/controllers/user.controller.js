@@ -19,7 +19,7 @@ let registerUser=async(req,res)=>{
         email:body.email,
         password:await bcrypt.hash(body.password,salt),
         phone:body.phone,
-        type:body.type||"U"
+        type:body.type||"user"
     })
     await newUser.save();
     if(!newUser){
