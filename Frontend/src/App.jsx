@@ -8,14 +8,11 @@ import NavBar from './Components/NavBar'
 import Profile from './Pages/Profile'
 import About from './Pages/About'
 
-
-
 function App() {
   const [count, setCount] = useState(0)
 
   return (
   <>
-  
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Home />} />

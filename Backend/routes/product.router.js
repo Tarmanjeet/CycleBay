@@ -1,15 +1,21 @@
-const express=require("express");
-const {getAllProducts,getProductById,createProduct,updateProduct,deleteProduct}=require("../controllers/product.controller");
-let productRouter=express.Router();
+const express = require("express");
+const {
+  getAllProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct
+} = require("../controllers/product.controller");
 
-productRouter.get("/",getAllProducts);
+const { isAuth, ownsProduct } = require("../middlewares/authenticate");
+const Product = require("../db/models/productSchema");
 
-productRouter.post("/create",createProduct);
+let productRouter = express.Router();
 
-productRouter.get("/:id",getProductById);
+productRouter.get("/", getAllProducts);
+productRouter.get("/:id", getProductById);
+productRouter.post("/create", isAuth, createProduct);
+productRouter.patch("/update/:id", isAuth, ownsProduct(Product), updateProduct);
+productRouter.delete("/delete/:id", isAuth, ownsProduct(Product), deleteProduct);
 
-productRouter.patch("/update/:id",updateProduct);
-
-productRouter.delete("/delete/:id",deleteProduct);
-
-module.exports=productRouter;
+module.exports = productRouter;
