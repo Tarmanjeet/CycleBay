@@ -25,7 +25,7 @@ app.use("/",(req,res)=>{
 app.use((req,res)=>{
     res.status(404).sendFile(path.join(__dirname,"/404.html"));
 })
-app.listen(8080,(err)=>{
+app.listen(8000,(err)=>{
     if(err) console.log("err",err);
-    console.log("server listening on 8080");
+    console.log("server listening on 8000");
 })
