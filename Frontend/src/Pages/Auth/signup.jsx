@@ -25,6 +25,7 @@ const SignUp = () => {
     };
   
     return (
+      <div className="signup-page">
       <div className="container">
         <h1>Welcome to CycleBay</h1>
         <form onSubmit={handleSubmit}>
@@ -43,6 +44,7 @@ const SignUp = () => {
           <div><p>Already have an account ? <Link to="/signin">Login</Link></p></div>
           <button type="submit">Sign Up</button>
         </form>
+      </div>
       </div>
     );
   };
