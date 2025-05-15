@@ -7,8 +7,11 @@ import NavBar from '../../Components/NavBar';
 function About() {  
     return (
     <>
-        <NavBar />
-        <h1>About Page</h1>
+    <div className="About">
+      <NavBar />
+  
+    </div>
+       
 
     </>
 

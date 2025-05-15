@@ -2,12 +2,16 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavBar from '../../Components/NavBar';
+import './home.css'
 
 function Home() {
     return (
         <>
-        <NavBar/>
-        <h1>Home</h1>
+        <div className="home">
+            <NavBar/>
+            
+        </div>
+       
         </>
     )
 }

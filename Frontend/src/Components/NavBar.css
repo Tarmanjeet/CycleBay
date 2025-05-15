@@ -1,13 +1,17 @@
+
+
+
 .navbar {
     
     display: flex;
     padding:20px;
     align-items: center;
-    background-color: #DDB892;
+  
     top: 0;
     height: 25px;
     width: 100%;
     position: fixed;
+    background-color: rgba(95, 95, 95, 0.4);
 
 }
 
@@ -23,5 +27,5 @@
 
 .navbar nav ul a {
     text-decoration: none;
-    color: aliceblue;
+    color: rgb(0, 0, 0);
 }
