@@ -52,7 +52,8 @@ const loginUser=async(req,res)=>{
     const payLoad={
         userId:user._id,
         type:user.type||0,
-        name:user.name
+        name:user.name ,
+        email : user.email
     }
     const tokenSecret=process.env.TOKEN_SECRET;
     jwt.sign(payLoad,tokenSecret,{expiresIn:3600},
