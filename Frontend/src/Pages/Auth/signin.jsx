@@ -24,7 +24,19 @@ const SignIn = () => {
     try {
       const response = await axios.post("http://localhost:3000/user/login", formData);
       if (response.status === 200) {
-        console.log("Response:", response.data);
+        console.log('Login response:', response.data);
+        const { token, user } = response.data;
+        
+       
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        
+   
+        console.log('Stored token:', localStorage.getItem('token'));
+        console.log('Stored user:', localStorage.getItem('user'));
+        
+        window.dispatchEvent(new Event('authStateChange'));
+        
         alert("User logged in successfully");
         navigate("/");
       }

@@ -78,7 +78,7 @@ const SignUp = () => {
               onChange={handleChange}
             />
           </div>
-          <div>
+          {/* <div>
             <label>Account Type:</label>
             <select
               name="type"
@@ -88,7 +88,7 @@ const SignUp = () => {
               <option value="user">User</option>
               <option value="superadmin">Super Admin</option>
             </select>
-          </div>
+          </div> */}
           <div>
             <p>
               Already have an account? <Link to="/signin">Login</Link>

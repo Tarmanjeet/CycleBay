@@ -35,38 +35,63 @@ function Home() {
         fetchProducts();
     }, []);
 
+    const categories = [
+        "All",
+        "Electronics",
+        "Mobile Phones",
+        "Clothes",
+        "Footwear",
+        "Accessories",
+        "Books",
+        "Beauty Products",
+        "Sports"
+    ];
+
     return (
         <>
-        <div className="home">
-            <NavBar/>
-            <h1>CycleBay</h1>
-        </div>
+            <div className="home">
+                <NavBar/>
+                <h1>CycleBay</h1>
+            </div>
 
-        <div className="Products-container">
-            <div>
-                Nav
-            </div>
-      
-            
-            <div className="Products-Grid">
-            {products.length > 0 ? (
-                products.map((product, index) => (
-                <div key={index} className="Products-Card">
-                    {console.log("Rendering product:", product)}
-                    <img 
-                        src={product.imgUrl} 
-                        alt={product.name} 
-                       
-                    />
-                    <h3>{product.name}</h3>
-                    <h3><del>{product.price}</del></h3>
+            <div className="Products-container">
+                <div className="home-nav">
+                    <div className="search-section">
+                        <div className="search-bar">
+                            <input type="text" placeholder="Search products..." />
+                        </div>
+                        <button className="filter-button">Filter</button>
+                    </div>
+                    <div className="categories">
+                        {categories.map((category, index) => (
+                            <button 
+                                key={index} 
+                                className={`category-button ${index === 0 ? 'active' : ''}`}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
                 </div>
-                ))
-            ) : (
-                <p>Loading products...</p>
-            )}
+                
+                <div className="Products-Grid">
+                    {products.length > 0 ? (
+                        products.map((product, index) => (
+                            <div key={index} className="Products-Card">
+                                {console.log("Rendering product:", product)}
+                                <img 
+                                    src={product.imgUrl} 
+                                    alt={product.name} 
+                                />
+                                <h3>{product.name}</h3>
+                                <h3><del>{product.price}</del></h3>
+                            </div>
+                        ))
+                    ) : (
+                        <p>Loading products...</p>
+                    )}
+                </div>
             </div>
-        </div>
         </>
     )
 }

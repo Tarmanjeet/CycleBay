@@ -1,9 +1,8 @@
-
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f9;
+  background-color: #ffffff;
 }
 
 .signup-page {
@@ -11,22 +10,22 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #434242, #1E1E1E);
+  background: #ffffff;
 }
 
 .signup-page .container {
-  background: #2B2B2B;
+  background: #ffffff;
   padding: 2rem;
   border-radius: 30px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 10px 20px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(128, 61, 59, 0.1), 0 10px 20px rgba(175, 130, 96, 0.05);
   width: 100%;
   max-width: 500px;
-  border: 2px solid #464646;
+  border: 2px solid #AF8260;
 }
 
 .signup-page .container h1 {
   text-align: center;
-  color: #5c5c5c;
+  color: #803D3B;
   margin-bottom: 1.5rem;
 }
 
@@ -38,31 +37,31 @@ body {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #555;
+  color: #322C2B;
 }
 
 .signup-page input {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #434343;
+  border: 1px solid #AF8260;
   border-radius: 5px;
   font-size: 1rem;
   box-sizing: border-box;
-  background-color: #3b3a39;
-  color: #b6b6b6;
+  background-color: #ffffff;
+  color: #322C2B;
 }
 
 .signup-page input:focus {
   outline: none;
-  border-color: #007bff;
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  border-color: #803D3B;
+  box-shadow: 0 0 5px rgba(128, 61, 59, 0.3);
 }
 
 .signup-page button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #043d7a;
-  color: white;
+  background-color: #803D3B;
+  color: #ffffff;
   border: none;
   border-radius: 5px;
   font-size: 1rem;
@@ -71,17 +70,18 @@ body {
 }
 
 .signup-page button:hover {
-  background-color: #0056b3;
+  background-color: #AF8260;
 }
 
 .signup-page p {
   text-align: center;
   margin-top: 1rem;
   font-size: 0.9rem;
+  color: #322C2B;
 }
 
 .signup-page p a {
-  color: #007bff;
+  color: #803D3B;
   text-decoration: none;
 }
 

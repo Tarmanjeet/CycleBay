@@ -10,7 +10,7 @@ import About from './Pages/About'
 import Sell from './Pages/Sell'
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
   <>
