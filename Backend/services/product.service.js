@@ -12,6 +12,11 @@ const getProductByIdService = async (id) => {
 
 const createProductService = async (data, userId) => {
   const { name, desc, price, category, imgUrl, description } = data;
+
+  if (!category || typeof category !== 'string') {
+    throw new Error("Category is required and must be a string");
+  }
+
   const schema = getDescriptionSchema(category);
   const modelName = `TempDescription_${category.replace(/\s+/g, '_')}`;
   const TempModel = mongoose.models[modelName] || mongoose.model(modelName, schema);
@@ -21,6 +26,7 @@ const createProductService = async (data, userId) => {
   const newProduct = new Product({ name, desc, price, category, imgUrl, description, createdBy: userId });
   return await newProduct.save();
 };
+
 
 const updateProductService = async (id, userId, updateData) => {
   const product = await Product.findById(id);

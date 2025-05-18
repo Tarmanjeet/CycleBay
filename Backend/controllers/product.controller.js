@@ -35,16 +35,15 @@ let getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const newProduct = await createProductService(req.body, req.user.userId);
-    return res.status(201).json({ success: true, message: "Product created successfully", data: newProduct });
-  } catch (err) {
-    if (err.name === 'ValidationError') {
-      return res.status(400).json({ success: false, message: "Invalid description fields", errors: err.errors });
-    }
-    console.error("CREATE PRODUCT ERROR:", err);
-    return res.status(500).json({ success: false, message: "Server Error" });
+    console.log("Request body:", req.body);  
+    const product = await createProductService(req.body, req.user.userId);
+    res.status(201).json(product);
+  } catch (error) {
+    console.error("CREATE PRODUCT ERROR:", error);
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
 
 let updateProduct = async (req, res) => {
   try {
