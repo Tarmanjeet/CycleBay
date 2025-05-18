@@ -3,7 +3,7 @@ const bodyParser=require("body-parser");
 const dotenv=require("dotenv").config();
 const userRouter=require("./routes/user.router");
 const productRouter=require("./routes/product.router");
-const orderRouter=require("./routes/order.router");
+//const orderRouter=require("./routes/order.router");
 const connection=require("./db/connection");
 const path = require("path");
 const cors = require('cors')
@@ -19,7 +19,7 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use("/user",userRouter);
 app.use("/product",productRouter);
-app.use("/order",orderRouter);
+//app.use("/order",orderRouter);
 
 app.use("/",(req,res)=>{
     res.status(200).send("Application is running");
