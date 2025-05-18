@@ -7,6 +7,7 @@ import SignUp from './Pages/Auth/signup'
 import NavBar from './Components/NavBar'
 import Profile from './Pages/Profile'
 import About from './Pages/About'
+import Sell from './Pages/Sell'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -20,6 +21,7 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/profile" element={<Profile />} /> 
             <Route path="/about" element={<About />} />
+            <Route path="/sell" element={<Sell/>} />
         </Routes>
       </BrowserRouter>
   </>
