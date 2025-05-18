@@ -1,47 +1,74 @@
-import React from 'react';
-import { useState } from 'react';
-import { useNavigate, Link, Navigate } from 'react-router-dom';
-import axios from 'axios';
-import './signin.css';
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import "./signin.css";
 
 const SignIn = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const Navigate = useNavigate();
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-      try {
-        const response = await axios.post('http://localhost:3000/user/login', { email, password });
-        if(response.status === 200) {
-          console.log('Response:', response.data);
-          alert("User registered successfully");
-          Navigate('/');
-        }
-      } catch (error) {
-        console.error('Error:', error.message);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3000/user/login", formData);
+      if (response.status === 200) {
+        console.log("Response:", response.data);
+        alert("User logged in successfully");
+        navigate("/");
       }
-    };
-  
-    return (
-      <div className="signin-page">
+    } catch (error) {
+      console.error("Error:", error.message);
+      alert("Login failed. Please check your credentials.");
+    }
+  };
+
+  return (
+    <div className="signin-page">
       <div className="container">
         <h1>Welcome Back</h1>
         <form onSubmit={handleSubmit}>
           <div>
             <label>Email:</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
           </div>
           <div>
             <label>Password:</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
           </div>
-          <div><p>Don't have an account ? <Link to="/signup">Register</Link></p></div>
+          <div>
+            <p>
+              Don't have an account? <Link to="/signup">Register</Link>
+            </p>
+          </div>
           <button type="submit">Sign In</button>
         </form>
       </div>
-      </div>
-    );
-  };
+    </div>
+  );
+};
 
 export default SignIn;
