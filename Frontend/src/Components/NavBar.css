@@ -69,6 +69,10 @@
     margin-left: auto;
 }
 
+.nav-right li {
+    list-style: none;
+}
+
 .nav-button {
     background-color: #803D3B;
     color: white !important;
@@ -171,5 +175,11 @@
 
 .dropdown-toggle:focus {
     box-shadow: none !important;
+}
+
+.likedIcon {
+    height:40px;
+    width:auto;
+    margin-right:30px;
 }
 

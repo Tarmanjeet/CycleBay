@@ -66,22 +66,27 @@ function NavBar() {
             <div className="navbar">
                 <nav>
                     <ul className="nav-left">
-                        <li><h1>CycleBay</h1></li>
+                        <li><h1><Link to="/">CycleBay</Link></h1></li>
                         <li><Link to="/">Home</Link></li>
+                        
                         <li>
                             <span 
-                                onClick={() => handleNavigation('/sell')}
-                                style={{ cursor: 'pointer' }}
-                            >
+                                onClick={() => handleNavigation('/sell')}>
                                 Sell
                             </span>
                         </li>
                     </ul>
                     <div className="nav-right">
+                    <li>
+                            <span 
+                                onClick={() => handleNavigation('/likedProducts')}>
+                                <img className="likedIcon" src="https://i.pinimgproxy.com/?url=aHR0cHM6Ly9jZG4taWNvbnMtcG5nLmZsYXRpY29uLmNvbS8yNTYvMTAyOS8xMDI5MTMyLnBuZw==&ts=1747657665&sig=c65fb94b0a47cd84484086d72b3256034b6a3508ea1c1842a6524a67fed134d9"></img>
+                            </span>
+                        </li>
                         <DropdownButton id="dropdown-basic-button" title=<img className="profile-icon" src="https://i.pinimg.com/736x/29/db/41/29db41559392929eb786e412a9dbfff3.jpg"></img>>
-                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                            <Dropdown.Item href="#/action-1">Your Profile</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">Your Ads</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
                         </DropdownButton>
                     
                     {isLoggedIn ? (
