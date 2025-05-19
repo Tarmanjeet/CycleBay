@@ -8,6 +8,8 @@ import NavBar from './Components/NavBar'
 import Profile from './Pages/Profile'
 import About from './Pages/About'
 import Sell from './Pages/Sell'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
 
