@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "./signin.css";
@@ -10,6 +10,13 @@ const SignIn = () => {
   });
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      navigate('/', { replace: true });
+    }
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,22 +30,32 @@ const SignIn = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:3000/user/login", formData);
-      if (response.status === 200) {
-        console.log('Login response:', response.data);
-        const { token, user } = response.data;
+      console.log('Login response:', response.data);
+      
+      if (response.data.success && response.data.token) {
+        const { token } = response.data;
         
-       
         localStorage.setItem('token', token);
-        localStorage.setItem('user', JSON.stringify(user));
         
-   
-        console.log('Stored token:', localStorage.getItem('token'));
-        console.log('Stored user:', localStorage.getItem('user'));
-        
-        window.dispatchEvent(new Event('authStateChange'));
-        
-        alert("User logged in successfully");
-        navigate("/");
+        const tokenParts = token.split('.');
+        if (tokenParts.length === 3) {
+          const payload = JSON.parse(atob(tokenParts[1]));
+          const userData = {
+            email: formData.email,
+            userId: payload.userId,
+            type: payload.type || 'user'
+          };
+          
+          localStorage.setItem('user', JSON.stringify(userData));
+          console.log('Stored user data:', userData);
+          
+          window.dispatchEvent(new Event('authStateChange'));
+          navigate('/', { replace: true }); 
+        } else {
+          throw new Error('Invalid token format');
+        }
+      } else {
+        throw new Error('Invalid response from server');
       }
     } catch (error) {
       console.error("Error:", error.message);

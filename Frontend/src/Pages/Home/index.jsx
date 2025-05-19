@@ -11,7 +11,6 @@ function Home() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                console.log("Fetching products...");
                 const response = await fetch('http://localhost:3000/product');
                 if (!response.ok) throw new Error("Failed to fetch Products");
                 const result = await response.json(); 
@@ -47,11 +46,18 @@ function Home() {
         "Sports"
     ];
 
+    const formatPrice = (price) => {
+        return new Intl.NumberFormat('en-IN', {
+            style: 'currency',
+            currency: 'INR',
+            maximumFractionDigits: 0
+        }).format(price);
+    };
+
     return (
         <>
             <div className="home">
                 <NavBar/>
-                <h1>CycleBay</h1>
             </div>
 
             <div className="Products-container">
@@ -78,13 +84,12 @@ function Home() {
                     {products.length > 0 ? (
                         products.map((product, index) => (
                             <div key={index} className="Products-Card">
-                                {console.log("Rendering product:", product)}
                                 <img 
                                     src={product.imgUrl} 
                                     alt={product.name} 
                                 />
                                 <h3>{product.name}</h3>
-                                <h3><del>{product.price}</del></h3>
+                                <h3 className="price">{formatPrice(product.price)}</h3>
                             </div>
                         ))
                     ) : (
