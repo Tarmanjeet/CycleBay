@@ -1,0 +1,208 @@
+.sell-page {
+    padding-top: 100px;
+    min-height: 100vh;
+    background-color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sell-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.sell-container h1 {
+    color: #803D3B;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.sell-form {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(128, 61, 59, 0.1), 0 10px 20px rgba(175, 130, 96, 0.05);
+    border: 2px solid #AF8260;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #322C2B;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #AF8260;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #322C2B;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #803D3B;
+    box-shadow: 0 0 5px rgba(128, 61, 59, 0.3);
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+
+.form-group > div {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group > div label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #322C2B;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.form-group > div input,
+.form-group > div select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #AF8260;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #322C2B;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.image-upload {
+    border: 2px dashed #AF8260;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.image-upload:hover {
+    border-color: #803D3B;
+    background-color: rgba(175, 130, 96, 0.05);
+}
+
+.image-upload p {
+    color: #322C2B;
+    margin: 0;
+}
+
+.image-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.image-preview img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #AF8260;
+}
+
+.price-input {
+    position: relative;
+}
+
+.price-input::before {
+    content: "₹";
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #322C2B;
+}
+
+.price-input input {
+    padding-left: 2rem !important;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #803D3B;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.submit-button:hover {
+    background-color: #AF8260;
+}
+
+
+@media (max-width: 768px) {
+    .sell-container {
+        padding: 1rem;
+    }
+
+    .sell-form {
+        padding: 1.5rem;
+    }
+
+    .sell-container h1 {
+        font-size: 2rem;
+    }
+}
+
+
+.submit-button:disabled {
+    background-color: #AF8260;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+.error-message {
+    color: #803D3B;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+
+.success-message {
+    background-color: rgba(128, 61, 59, 0.1);
+    color: #803D3B;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    text-align: center;
+} 
