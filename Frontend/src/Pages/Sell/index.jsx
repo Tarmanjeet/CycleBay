@@ -100,13 +100,26 @@ const Sell = () => {
         return;
       }
 
-      const response = await axios.post('http://localhost:3000/product/create', formData, {
+      const dataToSend = {
+        ...formData,
+        price: Number(formData.price),
+        description: {
+          ...formData.description,
+          DaysUsed: Number(formData.description.DaysUsed)
+        }
+      };
+
+      console.log('Sending data:', dataToSend); 
+
+      const response = await axios.post('http://localhost:3000/product/create', dataToSend, {
         headers: {
-          'Authorization': `Bearer ${token}`
+          'x-access-token': token
         }
       });
 
-      if (response.status === 200) {
+      console.log('Response:', response);
+
+      if (response.status === 200 || response.status === 201) {
         alert('Product created successfully!');
         setFormData({
           name: '',
@@ -125,10 +138,11 @@ const Sell = () => {
         });
       }
     } catch (error) {
+      console.error('Error details:', error.response || error); 
       if (error.response?.status === 401) {
         alert('Please login to create a product');
       } else {
-        alert('Error creating product: ' + error.message);
+        alert('Error creating product: ' + (error.response?.data?.message || error.message));
       }
     }
   }
@@ -165,7 +179,7 @@ const Sell = () => {
     <div className="sell-page">
       <NavBar />
       <div className="sell-container">
-        <h1>Create New Product</h1>
+        <h1>POST YOUR AD</h1>
         <form className="sell-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Product Name</label>
