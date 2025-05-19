@@ -11,11 +11,11 @@ let getAllProducts = async (req, res) => {
   try {
     let allProducts = await getAllProductsService();
     if (allProducts.length === 0) {
-      return res.status(404).sendFile("404.html", { root: process.cwd() });
+      return res.status(404).json({ success: false, message: "No products found" });
     }
     return res.status(200).json({ success: true, message: "All products fetched successfully", data: allProducts });
   } catch (err) {
-    console.error("GET ALL PRODUCTS ERROR:", err);
+    console.error("get all products error:", err);
     return res.status(500).json({ success: false, message: "Server Error" });
   }
 };
@@ -24,11 +24,11 @@ let getProductById = async (req, res) => {
   try {
     let product = await getProductByIdService(req.params.id);
     if (!product) {
-      return res.status(404).sendFile("404.html", { root: process.cwd() });
+      return res.status(404).json({ success: false, message: "Product not found" });
     }
     return res.status(200).json({ success: true, message: "Product fetched successfully", data: product });
   } catch (err) {
-    console.error("GET PRODUCT BY ID ERROR:", err);
+    console.error("get product by id error:", err);
     return res.status(500).json({ success: false, message: "Server Error" });
   }
 };
@@ -39,7 +39,7 @@ const createProduct = async (req, res) => {
     const product = await createProductService(req.body, req.user.userId);
     res.status(201).json(product);
   } catch (error) {
-    console.error("CREATE PRODUCT ERROR:", error);
+    console.error("create product error:", error);
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
@@ -48,7 +48,7 @@ const createProduct = async (req, res) => {
 let updateProduct = async (req, res) => {
   try {
     const updatedProduct = await updateProductService(req.params.id, req.user.userId, req.body);
-    if (!updatedProduct) return res.status(404).sendFile("404.html", { root: process.cwd() });
+    if (!updatedProduct) return res.status(404).json({ success: false, message: "Product not found" });
     return res.status(200).json({ success: true, message: "Product updated successfully", data: updatedProduct });
   } catch (err) {
     if (err.message === "Forbidden") {
@@ -57,7 +57,7 @@ let updateProduct = async (req, res) => {
     if (err.name === 'ValidationError') {
       return res.status(400).json({ success: false, message: "Invalid description fields in update", errors: err.errors });
     }
-    console.error("UPDATE ERROR:", err);
+    console.error("update product error:", err);
     return res.status(500).json({ success: false, message: "Server Error" });
   }
 };
@@ -65,13 +65,13 @@ let updateProduct = async (req, res) => {
 let deleteProduct = async (req, res) => {
   try {
     const result = await deleteProductService(req.params.id, req.user.userId);
-    if (!result) return res.status(404).sendFile("404.html", { root: process.cwd() });
+    if (!result) return res.status(404).json({ success: false, message: "Product not found" });
     res.status(200).json({ success: true, message: "Product deleted successfully" });
   } catch (err) {
     if (err.message === "Forbidden") {
       return res.status(403).json({ success: false, message: "You do not own this product" });
     }
-    console.error("DELETE ERROR:", err);
+    console.error("delete error:", err);
     return res.status(500).json({ success: false, message: "Server Error" });
   }
 };
