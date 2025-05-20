@@ -44,6 +44,7 @@ const loginUserService = async (body) => {
         userId: user._id,
         type: user.type || "user",
         name: user.name,
+        email: user.email
     };
 
     const tokenSecret = process.env.TOKEN_SECRET;
