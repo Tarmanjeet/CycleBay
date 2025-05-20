@@ -9,11 +9,30 @@ const {
 
 let getAllProducts = async (req, res) => {
   try {
-    let allProducts = await getAllProductsService();
+    const filters = {
+      category: req.query.category,
+      minPrice: req.query.minPrice,
+      maxPrice: req.query.maxPrice,
+      tags: req.query.tags,
+    };
+
+    const sortBy = req.query.sort || "createdAt"; // can be 'price', 'rating'
+    const sortOrder = req.query.order === "desc" ? -1 : 1;
+
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    let allProducts = await getAllProductsService(filters, sortBy, sortOrder, page, limit);
+
     if (allProducts.length === 0) {
       return res.status(404).json({ success: false, message: "No products found" });
     }
-    return res.status(200).json({ success: true, message: "All products fetched successfully", data: allProducts });
+
+    return res.status(200).json({
+      success: true,
+      message: "All products fetched successfully",
+      data: allProducts,
+    });
   } catch (err) {
     console.error("get all products error:", err);
     return res.status(500).json({ success: false, message: "Server Error" });

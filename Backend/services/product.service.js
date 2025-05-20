@@ -2,8 +2,33 @@ const { Product, getDescriptionSchema } = require("../db/models/productSchema");
 const mongoose = require("mongoose");
 const path = require("path");
 
-const getAllProductsService = async () => {
-  return await Product.find();
+const getAllProductsService = async (filters = {}, sortBy = "createdAt", sortOrder = 1, page = 1, limit = 10) => {
+  let query = {};
+
+  // Apply filters
+  if (filters.category) {
+    query.category = filters.category;
+  }
+
+  if (filters.minPrice || filters.maxPrice) {
+    query.price = {};
+    if (filters.minPrice) query.price.$gte = Number(filters.minPrice);
+    if (filters.maxPrice) query.price.$lte = Number(filters.maxPrice);
+  }
+
+  if (filters.tags) {
+    const tagsArray = filters.tags.split(",").map(tag => tag.trim());
+    query.tags = { $in: tagsArray };
+  }
+
+  // Sorting
+  let sort = {};
+  sort[sortBy] = sortOrder;
+
+  return await Product.find(query)
+    .sort(sort)
+    .skip((page - 1) * limit)
+    .limit(limit);
 };
 
 const getProductByIdService = async (id) => {

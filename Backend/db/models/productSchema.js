@@ -107,7 +107,9 @@ let productSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "users",
     required: true
-  }
+  },
+  tags: [{ type: String }],
+  rating: { type: Number, default: 0 } 
 });
 
 productSchema.pre("save", function (next) {
