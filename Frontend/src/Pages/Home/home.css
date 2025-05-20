@@ -193,3 +193,27 @@
         height: 180px;
     }
 }
+
+.Products-Card .likeIcon {
+    height: 40px;
+    width: 40px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.Products-Card .likeIcon:hover {
+    transform: scale(1.1);
+}
+
+.Products-Card .likeIcon:focus {
+    outline: none;
+}
+
+
+

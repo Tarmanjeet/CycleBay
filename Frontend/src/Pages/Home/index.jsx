@@ -1,27 +1,31 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import NavBar from '../../Components/NavBar';
-import './home.css'
+import './home.css';
 
 function Home() {
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
-   
+
     useEffect(() => {
         const fetchProducts = async () => {
             try {
                 const response = await fetch('http://localhost:3000/product');
                 if (!response.ok) throw new Error("Failed to fetch Products");
-                const result = await response.json(); 
+                const result = await response.json();
                 console.log(result);
 
                 if (result.success && Array.isArray(result.data)) {
-                    console.log(result.data);
-                    setProducts(result.data);
+                    const updatedProducts = result.data.map(product => ({
+                        ...product,
+                        isLiked: false,
+                    }));
+                    setProducts(updatedProducts);
                 } else if (Array.isArray(result)) {
-                    console.log(result);
-                    setProducts(result);
+                    const updatedProducts = result.map(product => ({
+                        ...product,
+                        isLiked: false, 
+                    }));
+                    setProducts(updatedProducts);
                 } else {
                     throw new Error("Data not found");
                 }
@@ -29,8 +33,8 @@ function Home() {
                 setError(err.message);
                 console.error("Error fetching products:", err);
             }
-        }
-        
+        };
+
         fetchProducts();
     }, []);
 
@@ -54,10 +58,18 @@ function Home() {
         }).format(price);
     };
 
+    const handleLikeClick = (index) => {
+        setProducts(prevProducts => 
+            prevProducts.map((product, i) =>
+                i === index ? { ...product, isLiked: !product.isLiked } : product
+            )
+        );
+    };
+
     return (
         <>
             <div className="home">
-                <NavBar/>
+                <NavBar />
             </div>
 
             <div className="Products-container">
@@ -79,7 +91,7 @@ function Home() {
                         ))}
                     </div>
                 </div>
-                
+
                 <div className="Products-Grid">
                     {products.length > 0 ? (
                         products.map((product, index) => (
@@ -89,6 +101,19 @@ function Home() {
                                     alt={product.name} 
                                 />
                                 <h3>{product.name}</h3>
+                                <button 
+                                    className="likeIcon" 
+                                    onClick={() => handleLikeClick(index)}
+                                >
+                                    <img 
+                                        src={product.isLiked 
+                                            ? "https://cdn-icons-png.flaticon.com/128/2589/2589175.png"
+                                            : "https://cdn-icons-png.flaticon.com/128/2589/2589197.png"
+                                        } // https://cdn-icons-png.flaticon.com/128/2589/2589175.png
+                                        alt="Like"
+                                        style={{ width: '100%', height: '100%' }}
+                                    />
+                                </button>
                                 <h3 className="price">{formatPrice(product.price)}</h3>
                             </div>
                         ))
@@ -98,7 +123,7 @@ function Home() {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
 export default Home;

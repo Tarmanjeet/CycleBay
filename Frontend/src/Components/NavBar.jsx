@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 
 function NavBar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -64,29 +66,30 @@ function NavBar() {
             <div className="navbar">
                 <nav>
                     <ul className="nav-left">
-                        <li><h1>CycleBay</h1></li>
+                        <li><h1><Link to="/">CycleBay</Link></h1></li>
                         <li><Link to="/">Home</Link></li>
-                      
                         
                         <li>
                             <span 
-                                onClick={() => handleNavigation('/sell')}
-                                style={{ cursor: 'pointer' }}
-                            >
+                                onClick={() => handleNavigation('/sell')}>
                                 Sell
                             </span>
                         </li>
-                        
                     </ul>
                     <div className="nav-right">
-                        <span 
-                            onClick={() => handleNavigation('/profile')}
-                            style={{ cursor: 'pointer' }}
-                        >
-                            <img className="profile-icon" src="https://i.pinimgproxy.com/?url=aHR0cHM6Ly9jZG4taWNvbnMtcG5nLmZsYXRpY29uLmNvbS8yNTYvODk3Lzg5NzM4OS5wbmc=&ts=1747636590&sig=28d1ccffeb407b0a406e914abefbc13ea1d5015348281ead04159bb47bda2a14"></img>
-                        </span>
-                        
-                        {isLoggedIn ? (
+                    <li>
+                            <span 
+                                onClick={() => handleNavigation('/likedProducts')}>
+                                <img className="likedIcon" src="https://cdn-icons-png.flaticon.com/128/10307/10307920.png"></img>
+                            </span>
+                        </li>
+                        <DropdownButton id="dropdown-basic-button" title=<img className="profile-icon" src="https://i.pinimg.com/736x/29/db/41/29db41559392929eb786e412a9dbfff3.jpg"></img>>
+                            <Dropdown.Item onClick={() => handleNavigation('/profile')}>Your Profile</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">Your Ads</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
+                        </DropdownButton>
+                    
+                    {isLoggedIn ? (
                             <>
                                 <span className="user-email">{userEmail}</span>
                                 <button onClick={handleLogout} className="nav-button">Logout</button>
