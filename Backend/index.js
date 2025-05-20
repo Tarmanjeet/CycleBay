@@ -4,6 +4,7 @@ const dotenv=require("dotenv").config();
 const userRouter=require("./routes/user.router");
 const productRouter=require("./routes/product.router");
 const orderRouter=require("./routes/order.router");
+const wishlistRouter=require("./routes/wishlist.router");
 const connection=require("./db/connection");
 const path = require("path");
 const cors = require('cors')
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 app.use("/user",userRouter);
 app.use("/product",productRouter);
 app.use("/order",orderRouter);
+app.use("/wishlist",wishlistRouter);
 
 app.use("/",(req,res)=>{
     res.status(200).send("Application is running");
