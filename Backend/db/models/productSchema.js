@@ -95,6 +95,10 @@ let productSchema = new mongoose.Schema({
   imgUrl: {
     type: String
   },
+  liked : {
+    type: Boolean,
+    default: false
+  },
   description: {
     type: mongoose.Schema.Types.Mixed, 
     required: true
