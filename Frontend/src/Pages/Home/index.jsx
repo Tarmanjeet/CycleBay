@@ -104,7 +104,7 @@ function Home() {
                             <div key={index} className="Products-Card"
                               onClick={()=>productClick(product._id)}>
                                 <img 
-                                    src={product.imgUrl} 
+                                    src={product.imgUrl}
                                     alt={product.name} 
                                 />
                                 <h3>{product.name}</h3>
