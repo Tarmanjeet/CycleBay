@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../../Components/NavBar';
 import './home.css';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
+    const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
 
@@ -65,6 +67,10 @@ function Home() {
             )
         );
     };
+    
+    const productClick=(prductId)=>{
+        navigate(`/product/${prductId}`);
+    }
 
     return (
         <>
@@ -95,7 +101,8 @@ function Home() {
                 <div className="Products-Grid">
                     {products.length > 0 ? (
                         products.map((product, index) => (
-                            <div key={index} className="Products-Card">
+                            <div key={index} className="Products-Card"
+                              onClick={()=>productClick(product._id)}>
                                 <img 
                                     src={product.imgUrl} 
                                     alt={product.name} 

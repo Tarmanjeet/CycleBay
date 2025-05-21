@@ -8,6 +8,7 @@ import LikedProducts from './Pages/Liked/index.jsx'
 import Profile from './Pages/Profile'
 import About from './Pages/About'
 import Sell from './Pages/Sell'
+import ProductDetail from './Pages/ProductDetail'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -24,7 +25,8 @@ function App() {
             <Route path="/profile" element={<Profile />} /> 
             <Route path="/about" element={<About />} />
             <Route path="/sell" element={<Sell/>} />
-            <Route path="/likedProducts" element={<LikedProducts/>} /> 
+            <Route path="/likedProducts" element={<LikedProducts/>} />
+            <Route path="/product/:id" element={<ProductDetail/>}/>
         </Routes>
       </BrowserRouter>
   </>
