@@ -4,7 +4,9 @@ const {
   getProductById,
   createProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  likeProduct,
+  unlikeProduct
 } = require("../controllers/product.controller");
 
 const { isAuth, ownsProduct } = require("../middlewares/authenticate");
@@ -17,5 +19,7 @@ productRouter.get("/:id", getProductById);
 productRouter.post("/create", isAuth, createProduct);
 productRouter.patch("/update/:id", isAuth, ownsProduct(Product), updateProduct);
 productRouter.delete("/delete/:id", isAuth, ownsProduct(Product), deleteProduct);
+productRouter.post("/like/:id", isAuth, likeProduct);
+productRouter.post("/unlike/:id", isAuth, unlikeProduct);
 
 module.exports = productRouter;

@@ -68,7 +68,6 @@ function NavBar() {
                     <ul className="nav-left">
                         <li><h1><Link to="/">CycleBay</Link></h1></li>
                         <li><Link to="/">Home</Link></li>
-                        
                         <li>
                             <span 
                                 onClick={() => handleNavigation('/sell')}>
@@ -77,22 +76,20 @@ function NavBar() {
                         </li>
                     </ul>
                     <div className="nav-right">
-                    <li>
-                            <span 
-                                onClick={() => handleNavigation('/likedProducts')}>
-                                <img className="likedIcon" src="https://cdn-icons-png.flaticon.com/128/10307/10307920.png"></img>
-                            </span>
-                        </li>
-                        <DropdownButton id="dropdown-basic-button" title=<img className="profile-icon" src="https://i.pinimg.com/736x/29/db/41/29db41559392929eb786e412a9dbfff3.jpg"></img>>
-                            <Dropdown.Item onClick={() => handleNavigation('/profile')}>Your Profile</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Your Ads</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Logout</Dropdown.Item>
-                        </DropdownButton>
-                    
-                    {isLoggedIn ? (
+                        {isLoggedIn ? (
                             <>
+                                <li>
+                                    <span 
+                                        onClick={() => handleNavigation('/likedProducts')}>
+                                        <img className="likedIcon" src="https://cdn-icons-png.flaticon.com/128/10307/10307920.png"></img>
+                                    </span>
+                                </li>
+                                <DropdownButton id="dropdown-basic-button" title=<img className="profile-icon" src="https://i.pinimg.com/736x/29/db/41/29db41559392929eb786e412a9dbfff3.jpg"></img>>
+                                    <Dropdown.Item onClick={() => handleNavigation('/profile')}>Your Profile</Dropdown.Item>
+                                    <Dropdown.Item href="#/action-2">Your Ads</Dropdown.Item>
+                                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                </DropdownButton>
                                 <span className="user-email">{userEmail}</span>
-                                <button onClick={handleLogout} className="nav-button">Logout</button>
                             </>
                         ) : (
                             <Link to="/signin" className="nav-button">Login</Link>
