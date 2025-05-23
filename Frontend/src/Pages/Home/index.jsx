@@ -11,29 +11,50 @@ function Home() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://localhost:3000/product');
-                if (!response.ok) throw new Error("Failed to fetch Products");
+                const token = localStorage.getItem('token');
+                const headers = token ? {
+                    'x-access-token': token
+                } : {};
+
+                const response = await fetch('http://localhost:3000/product', {
+                    headers
+                });
+                
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        setError("No products found");
+                    } else {
+                        throw new Error(`Failed to fetch Products: ${response.statusText}`);
+                    }
+                    return;
+                }
                 const result = await response.json();
                 console.log(result);
 
                 if (result.success && Array.isArray(result.data)) {
+                    const userData = JSON.parse(localStorage.getItem('user') || '{}');
                     const updatedProducts = result.data.map(product => ({
                         ...product,
-                        isLiked: false,
+                        isLiked: product.likedBy?.includes(userData.userId) || false,
                     }));
                     setProducts(updatedProducts);
                 } else if (Array.isArray(result)) {
+                    const userData = JSON.parse(localStorage.getItem('user') || '{}');
                     const updatedProducts = result.map(product => ({
                         ...product,
-                        isLiked: false, 
+                        isLiked: product.likedBy?.includes(userData.userId) || false,
                     }));
                     setProducts(updatedProducts);
                 } else {
-                    throw new Error("Data not found");
+                    throw new Error("Invalid data format received");
                 }
             } catch (err) {
-                setError(err.message);
                 console.error("Error fetching products:", err);
+                if (err.message === "Failed to fetch") {
+                    setError("Unable to connect to the server. Please make sure the backend server is running.");
+                } else {
+                    setError(err.message || "An error occurred while fetching products");
+                }
             }
         };
 
@@ -60,12 +81,38 @@ function Home() {
         }).format(price);
     };
 
-    const handleLikeClick = (index) => {
-        setProducts(prevProducts => 
-            prevProducts.map((product, i) =>
-                i === index ? { ...product, isLiked: !product.isLiked } : product
-            )
-        );
+    const handleLikeClick = async (index, productId) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                navigate('/signin');
+                return;
+            }
+
+            const product = products[index];
+            const isLiked = product.isLiked;
+            const endpoint = isLiked ? 'unlike' : 'like';
+            
+            const response = await fetch(`http://localhost:3000/product/${endpoint}/${productId}`, {
+                method: 'POST',
+                headers: {
+                    'x-access-token': token
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update like status');
+            }
+
+            setProducts(prevProducts => 
+                prevProducts.map((p, i) =>
+                    i === index ? { ...p, isLiked: !p.isLiked } : p
+                )
+            );
+        } catch (error) {
+            console.error('Error updating like status:', error);
+            alert('Failed to update like status. Please try again.');
+        }
     };
     
     const productClick=(prductId)=>{
@@ -110,7 +157,10 @@ function Home() {
                                 <h3>{product.name}</h3>
                                 <button 
                                     className="likeIcon" 
-                                    onClick={() => handleLikeClick(index)}
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleLikeClick(index, product._id);
+                                    }}
                                 >
                                     <img 
                                         src={product.isLiked 

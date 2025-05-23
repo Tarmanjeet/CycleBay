@@ -7,6 +7,8 @@ const {
   deleteProductService
 } = require("../services/product.service");
 
+const { Product } = require("../db/models/productSchema");
+
 let getAllProducts = async (req, res) => {
   try {
     const filters = {
@@ -16,7 +18,7 @@ let getAllProducts = async (req, res) => {
       tags: req.query.tags,
     };
 
-    const sortBy = req.query.sort || "createdAt"; // can be 'price', 'rating'
+    const sortBy = req.query.sort || "createdAt";
     const sortOrder = req.query.order === "desc" ? -1 : 1;
 
     const page = parseInt(req.query.page) || 1;
@@ -95,10 +97,66 @@ let deleteProduct = async (req, res) => {
   }
 };
 
+const likeProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+   
+    if (product.likedBy.includes(req.user.userId)) {
+      return res.status(400).json({ success: false, message: "You have already liked this product" });
+    }
+
+
+    product.likedBy.push(req.user.userId);
+    await product.save();
+
+    return res.status(200).json({ 
+      success: true, 
+      message: "Product liked successfully",
+      data: product 
+    });
+  } catch (err) {
+    console.error("like product error:", err);
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+const unlikeProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ success: false, message: "Product not found" });
+    }
+
+    
+    if (!product.likedBy.includes(req.user.userId)) {
+      return res.status(400).json({ success: false, message: "You have not liked this product yet" });
+    }
+
+    
+    product.likedBy = product.likedBy.filter(id => id.toString() !== req.user.userId);
+    await product.save();
+
+    return res.status(200).json({ 
+      success: true, 
+      message: "Product unliked successfully",
+      data: product 
+    });
+  } catch (err) {
+    console.error("unlike product error:", err);
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
   createProduct,
   updateProduct,
-  deleteProduct
+  deleteProduct,
+  likeProduct,
+  unlikeProduct
 };
