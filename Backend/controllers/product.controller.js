@@ -22,7 +22,7 @@ let getAllProducts = async (req, res) => {
     const sortOrder = req.query.order === "desc" ? -1 : 1;
 
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
+    const limit = parseInt(req.query.limit) || 100;
 
     let allProducts = await getAllProductsService(filters, sortBy, sortOrder, page, limit);
 
