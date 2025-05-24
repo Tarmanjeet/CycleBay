@@ -12,14 +12,16 @@ const { Product } = require("../db/models/productSchema");
 let getAllProducts = async (req, res) => {
   try {
     const filters = {
+      search: req.query.search,
       category: req.query.category,
       minPrice: req.query.minPrice,
       maxPrice: req.query.maxPrice,
       tags: req.query.tags,
     };
 
-    const sortBy = req.query.sort || "createdAt";
-    const sortOrder = req.query.order === "desc" ? -1 : 1;
+    const sortBy = req.query.sortBy || "createdAt";
+    const sortOrder = req.query.sortOrder === "-1" ? -1 : 1;
+ 
 
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 100;
