@@ -73,52 +73,57 @@ function ProductDetail() {
     <>
       <NavBar />
       <div className="product-container">
-        <div className="image-wrapper">
-          <img src={product.imgUrl} alt={product.name} className="product-image" />
-        </div>
-
-        <div className="info-box">
-          <h1 className="product-title">{product.name}</h1>
-          <h2 className="product-price">{formatPrice(product.price)}</h2>
-
-          <div className="product-description">
-            <div className="overview-header">
-              <h3>Overview</h3>
-              <div className="price-action-section">
-                <h2 className="overview-price">{formatPrice(product.price)}</h2>
-                <button className="make-offer-btn">Make Offer</button>
-              </div>
-            </div> 
-            <div className="description-details">
-              <div className="overview-list">
-                {Object.entries(product.description || {}).map(([key, value]) => (
-                  <div key={key} className="overview-item">
-                    <span className="item-label">{key}:</span>
-                    <span className="item-value">{value}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+        <div className="content-wrapper">
+          <div className="image-wrapper">
+            <img src={product.imgUrl} alt={product.name} className="product-image" />
           </div>
-          <div className="seller-info-section">
-            <div className="seller-header">
-              <h3>Seller Information</h3>
-            </div>
-            <div className="seller-details">
-              <div className="seller-info">
-                <div className="info-item">
-                  <span className="info-label">Posted by:</span>
-                  <span className="info-value">{product.createdBy?.name || 'Anonymous'}</span>
+
+          <div className="info-box">
+            <h1 className="product-title">{product.name}</h1>
+            <h2 className="product-price">{formatPrice(product.price)}</h2>
+
+            <div className="product-description">
+              <div className="overview-header">
+                <h3>Overview</h3>
+                <div className="price-action-section">
+                  <h2 className="overview-price">{formatPrice(product.price)}</h2>
+                  <button className="make-offer-btn">Make Offer</button>
                 </div>
-                <div className="info-item">
-                  <span className="info-label">Posted on:</span>
-                  <span className="info-value">{new Date(product.createdAt).toLocaleDateString()}</span>
+              </div> 
+              <div className="description-details">
+                <div className="description-text">
+                  <p>{product.desc}</p>
+                </div>
+                <div className="overview-list">
+                  {Object.entries(product.description || {}).map(([key, value]) => (
+                    <div key={key} className="description-item">
+                      <span className="description-label">{key}</span>
+                      <span className="description-value">{value}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
-              <button className="chat-seller-btn">
-                <img src="https://cdn-icons-png.flaticon.com/128/134/134914.png" alt="chat" />
-                Chat with Seller
-              </button>
+            </div>
+            <div className="seller-info-section">
+              <div className="seller-header">
+                <h3>Seller Information</h3>
+              </div>
+              <div className="seller-details">
+                <div className="seller-info">
+                  <div className="info-item">
+                    <span className="info-label">Posted by:</span>
+                    <span className="info-value">{product.createdBy?.name || 'Anonymous'}</span>
+                  </div>
+                  <div className="info-item">
+                    <span className="info-label">Posted on:</span>
+                    <span className="info-value">{new Date(product.createdAt).toLocaleDateString()}</span>
+                  </div>
+                </div>
+                <button className="chat-seller-btn">
+                  <img src="https://cdn-icons-png.flaticon.com/128/134/134914.png" alt="chat" />
+                  Chat with Seller
+                </button>
+              </div>
             </div>
           </div>
         </div>
