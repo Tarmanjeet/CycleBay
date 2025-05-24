@@ -7,59 +7,53 @@ function Home() {
     const navigate = useNavigate();
     const [products, setProducts] = useState([]);
     const [error, setError] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [selectedCategory, setSelectedCategory] = useState("All");
+    const [minPrice, setMinPrice] = useState("");
+    const [maxPrice, setMaxPrice] = useState("");
+    const [sortBy, setSortBy] = useState("");
+
 
     useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const token = localStorage.getItem('token');
-                const headers = token ? {
-                    'x-access-token': token
-                } : {};
+    const fetchProducts = async () => {
+        try {
+            const token = localStorage.getItem('token');
+            const headers = token ? { 'x-access-token': token } : {};
 
-                const response = await fetch('http://localhost:3000/product', {
-                    headers
-                });
-                
-                if (!response.ok) {
-                    if (response.status === 404) {
-                        setError("No products found");
-                    } else {
-                        throw new Error(`Failed to fetch Products: ${response.statusText}`);
-                    }
-                    return;
-                }
-                const result = await response.json();
-                console.log(result);
-
-                if (result.success && Array.isArray(result.data)) {
-                    const userData = JSON.parse(localStorage.getItem('user') || '{}');
-                    const updatedProducts = result.data.map(product => ({
-                        ...product,
-                        isLiked: product.likedBy?.includes(userData.userId) || false,
-                    }));
-                    setProducts(updatedProducts);
-                } else if (Array.isArray(result)) {
-                    const userData = JSON.parse(localStorage.getItem('user') || '{}');
-                    const updatedProducts = result.map(product => ({
-                        ...product,
-                        isLiked: product.likedBy?.includes(userData.userId) || false,
-                    }));
-                    setProducts(updatedProducts);
-                } else {
-                    throw new Error("Invalid data format received");
-                }
-            } catch (err) {
-                console.error("Error fetching products:", err);
-                if (err.message === "Failed to fetch") {
-                    setError("Unable to connect to the server. Please make sure the backend server is running.");
-                } else {
-                    setError(err.message || "An error occurred while fetching products");
-                }
+            const params = new URLSearchParams();
+            if (selectedCategory !== "All") params.append("category", selectedCategory);
+            if (minPrice) params.append("minPrice", minPrice);
+            if (maxPrice) params.append("maxPrice", maxPrice);
+            if (sortBy) {
+                const [field, order] = sortBy.split("-");
+                params.append("sortBy", field);
+                params.append("sortOrder", order === "asc" ? "1" : "-1");
             }
-        };
+            if (searchTerm) params.append("search", searchTerm); // Optional - if backend supports it
 
-        fetchProducts();
-    }, []);
+            const response = await fetch(`http://localhost:3000/product?${params.toString()}`, {
+                headers
+            });
+
+            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
+            const result = await response.json();
+
+            const userData = JSON.parse(localStorage.getItem('user') || '{}');
+            const updatedProducts = (result.data || result).map(product => ({
+                ...product,
+                isLiked: product.likedBy?.includes(userData.userId) || false,
+            }));
+            setProducts(updatedProducts);
+
+        } catch (err) {
+            console.error("Error fetching products:", err);
+            setError("Something went wrong while fetching products.");
+        }
+    };
+
+    fetchProducts();
+}, [selectedCategory, minPrice, maxPrice, sortBy, searchTerm]);
+
 
     const categories = [
         "All",
@@ -129,19 +123,42 @@ function Home() {
                 <div className="home-nav">
                     <div className="search-section">
                         <div className="search-bar">
-                            <input type="text" placeholder="Search products..." />
+                            <input type="text" placeholder="Search products..." 
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}/>
                         </div>
-                        <button className="filter-button">Filter</button>
+                        <select className="sort-select" value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+  <option value="">Sort By</option>
+  <option value="price-asc">Price: Low to High</option>
+  <option value="price-desc">Price: High to Low</option>
+  <option value="createdAt-desc">Newest</option>
+  <option value="createdAt-asc">Oldest</option>
+</select>
+
                     </div>
                     <div className="categories">
                         {categories.map((category, index) => (
                             <button 
                                 key={index} 
-                                className={`category-button ${index === 0 ? 'active' : ''}`}
+                                className={`category-button ${selectedCategory === category ? 'active' : ''}`}
+        onClick={() => setSelectedCategory(category)}
                             >
                                 {category}
                             </button>
                         ))}
+                        <input
+                            type="number"
+                            placeholder="min price" 
+                            className="min-price-input"
+                            value={minPrice} 
+                            onChange={(e) => setMinPrice(e.target.value)}/>
+                        <input
+                            type="number"
+                            placeholder="max price" 
+                            className="max-price-input"
+                            value={maxPrice} 
+                            onChange={(e) => setMaxPrice(e.target.value)}
+                            />
                     </div>
                 </div>
 

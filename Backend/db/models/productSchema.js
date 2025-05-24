@@ -108,8 +108,14 @@ let productSchema = new mongoose.Schema({
     ref: "users",
     required: true
   },
-  tags: [{ type: String }],
-  rating: { type: Number, default: 0 } 
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  updatedAt: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 productSchema.pre("save", function (next) {

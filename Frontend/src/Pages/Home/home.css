@@ -26,9 +26,19 @@
     margin-bottom: 30px;
 }
 
+.sort-select {
+    padding: 12px 25px;
+    background-color: #803D3B;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
 .search-section {
     display: flex;
-    gap: 20px;
     margin-bottom: 20px;
 }
 
@@ -62,24 +72,9 @@
     font-size: 1.2rem;
 }
 
-.filter-button {
-    padding: 12px 25px;
-    background-color: #803D3B;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.filter-button:hover {
-    background-color: #AF8260;
-}
-
 .categories {
     display: flex;
-    gap: 15px;
+    gap: 6.5px;
     flex-wrap: wrap;
 }
 
