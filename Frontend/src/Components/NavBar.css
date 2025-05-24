@@ -38,8 +38,7 @@
     list-style: none;
 }
 
-.nav-left li::before,
-.nav-left li::after {
+.nav-left li::before {
     content: none;
 }
 
@@ -98,7 +97,7 @@
 }
 
 .profile-icon {
-    height: 40px;
+    height: 35px;
     width: auto;
     border-radius: 10px;
  
@@ -106,7 +105,7 @@
 
 .dropdown-basic-button {
     background-color: white;
-    color: white;
+    color: black;
 }
 
 .profile-dropdown-title {
@@ -127,6 +126,10 @@
     font-weight: 500;
     background: none;
     padding: 0;
+}
+
+button#dropdown-basic-button {
+  color: rgb(13, 12, 12);
 }
 
 .dropdown-menu {
@@ -178,8 +181,7 @@
 }
 
 .likedIcon {
-    height:40px;
+    height:45px;
     width:auto;
-    margin-right:30px;
 }
 
