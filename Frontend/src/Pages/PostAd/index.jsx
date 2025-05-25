@@ -11,7 +11,7 @@ const PostAd = () => {
     category: '',
     condition: 'new',
     stock: 1,
-    imgUrl: '',
+    image: null,
     description: {
       BrandName: '',
       DaysUsed: '',
@@ -88,53 +88,44 @@ const PostAd = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
+
+    const fd = new FormData();
+    fd.append("name", formData.name);
+    fd.append("price", Number(formData.price));
+    fd.append("desc", formData.desc);
+    fd.append("category", formData.category);
+    fd.append("stock", Number(formData.stock));
+    fd.append("image", formData.image); 
+    fd.append("description", JSON.stringify(formData.description));
+
     try {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        alert('Please login to create a product');
-        return;
-      }
-
-      const dataToSend = {
-        ...formData,
-        price: Number(formData.price),
-        description: {
-          ...formData.description,
-          DaysUsed: Number(formData.description.DaysUsed)
-        }
-      };
-
-      const response = await axios.post('http://localhost:3000/product/create', dataToSend, {
+      const response = await axios.post("http://localhost:3000/product/create", fd, {
         headers: {
-          'x-access-token': token
+          "x-access-token": token,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log("Product added:", response.data);
+
+    // Reset form
+      setFormData({
+        name: '',
+        desc: '',
+        price: '',
+        category: '',
+        condition: 'new',
+        stock: 1,
+        image: null,
+        description: {
+          BrandName: '',
+          DaysUsed: '',
+          Condition: 'New',
+          color: ''
         }
       });
-
-      if (response.status === 200 || response.status === 201) {
-        alert('Product created successfully!');
-        setFormData({
-          name: '',
-          desc: '',
-          price: '',
-          category: '',
-          condition: 'new',
-          stock: 1,
-          imgUrl: '',
-          description: {
-            BrandName: '',
-            DaysUsed: '',
-            Condition: 'New',
-            color: ''
-          }
-        });
-      }
-    } catch (error) {
-      console.error('Error details:', error.response || error);
-      if (error.response?.status === 401) {
-        alert('Please login to create a product');
-      } else {
-        alert('Error creating product: ' + (error.response?.data?.message || error.message));
-      }
+      } catch (error) {
+      console.error("Error submitting form:", error);
     }
   };
 
@@ -143,7 +134,7 @@ const PostAd = () => {
     return fields.map(({ label, name, type, options }) => (
       <div key={name}>
         <label>{label}:</label>
-        {type == 'select' ? (
+        {type === 'select' ? (
           <select name={name} value={formData.description[name] || ''} onChange={handleChange} required>
             <option value="">Select</option>
             {options.map(option => (
@@ -186,8 +177,13 @@ const PostAd = () => {
           </div>
 
           <div className="form-group">
-            <label>Image URL</label>
-            <input type="text" name="imgUrl" value={formData.imgUrl} onChange={handleChange} />
+            <label>Image File</label>
+            <input type="file"
+              name="image"
+              accept="image/*"
+              onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.files[0] }))}
+              required
+            />
           </div>
 
           <div className="form-group">

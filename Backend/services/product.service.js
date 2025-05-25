@@ -43,7 +43,7 @@ const getProductByIdService = async (id) => {
 };
 
 const createProductService = async (data, userId) => {
-  const { name, desc, price, category, imgUrl, description } = data;
+  const { name, desc, price, category, image, description } = data;
 
   if (!category || typeof category !== 'string') {
     throw new Error("Category is required and must be a string");
@@ -55,7 +55,7 @@ const createProductService = async (data, userId) => {
   const descDoc = new TempModel(description);
   const validationError = descDoc.validateSync();
   if (validationError) throw validationError;
-  const newProduct = new Product({ name, desc, price, category, imgUrl, description, createdBy: userId });
+  const newProduct = new Product({ name, desc, price, category, image, description, createdBy: userId });
   return await newProduct.save();
 };
 

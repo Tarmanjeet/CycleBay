@@ -92,7 +92,7 @@ let productSchema = new mongoose.Schema({
     default: "Electronics",
     required: true
   },
-  imgUrl: {
+  image: {
     type: String
   },
   likedBy: [{

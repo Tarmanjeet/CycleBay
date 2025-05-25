@@ -93,7 +93,7 @@ function Home() {
             const response = await fetch(`http://localhost:3000/product/${endpoint}/${productId}`, {
                 method: 'POST',
                 headers: {
-                    ...headers,
+                    "x-access-token": token,
                     'Content-Type': 'application/json'
                 }
             });
@@ -171,7 +171,7 @@ function Home() {
                             <div key={index} className="Products-Card"
                               onClick={()=>productClick(product._id)}>
                                 <img 
-                                    src={product.imgUrl}
+                                    src={`http://localhost:3000/uploads/${product.image}`}
                                     alt={product.name} 
                                 />
                                 <h3>{product.name}</h3>
