@@ -29,10 +29,13 @@ function Home() {
                 params.append("sortBy", field);
                 params.append("sortOrder", order === "asc" ? "1" : "-1");
             }
-            if (searchTerm) params.append("search", searchTerm); // Optional - if backend supports it
+            if (searchTerm) params.append("search", searchTerm);
 
             const response = await fetch(`http://localhost:3000/product?${params.toString()}`, {
-                headers
+                headers: {
+                    ...headers,
+                    'Content-Type': 'application/json'
+                }
             });
 
             if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
@@ -90,7 +93,8 @@ function Home() {
             const response = await fetch(`http://localhost:3000/product/${endpoint}/${productId}`, {
                 method: 'POST',
                 headers: {
-                    'x-access-token': token
+                    ...headers,
+                    'Content-Type': 'application/json'
                 }
             });
 
