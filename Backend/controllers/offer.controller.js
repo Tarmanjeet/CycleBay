@@ -1,4 +1,3 @@
-// controllers/offerController.js
 const { sendOfferEmail } = require('../services/offer.service');
 
 const handleSendOffer = async (req, res) => {
