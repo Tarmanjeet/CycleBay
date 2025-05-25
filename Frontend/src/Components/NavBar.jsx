@@ -81,10 +81,10 @@ function NavBar() {
                                 <li>
                                     <span 
                                         onClick={() => handleNavigation('/likedProducts')}>
-                                        <img className="likedIcon" src="https://cdn-icons-png.flaticon.com/128/10307/10307920.png"></img>
+                                        <img className="likedIcon" src="https://cdn-icons-png.flaticon.com/128/2589/2589175.png"></img>
                                     </span>
                                 </li>
-                                <DropdownButton id="dropdown-basic-button" title=<img className="profile-icon" src="https://i.pinimg.com/736x/29/db/41/29db41559392929eb786e412a9dbfff3.jpg"></img>>
+                                <DropdownButton id="dropdown-basic-button" title=<img className="profile-icon" src="https://cdn-icons-png.flaticon.com/128/456/456283.png"></img>>
                                     <Dropdown.Item onClick={() => handleNavigation('/profile')}>Your Profile</Dropdown.Item>
                                     <Dropdown.Item href="#/action-2">Your Ads</Dropdown.Item>
                                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>

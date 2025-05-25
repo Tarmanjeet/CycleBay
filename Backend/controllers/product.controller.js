@@ -153,6 +153,26 @@ const unlikeProduct = async (req, res) => {
   }
 };
 
+const getProductsByUserId = async (req, res) => {
+  try {
+    const products = await Product.find({ createdBy: req.params.userId })
+      .sort({ createdAt: -1 });
+    
+    if (!products) {
+      return res.status(404).json({ success: false, message: "No products found" });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "User products fetched successfully",
+      data: products
+    });
+  } catch (err) {
+    console.error("get user products error:", err);
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
 module.exports = {
   getAllProducts,
   getProductById,
@@ -160,5 +180,6 @@ module.exports = {
   updateProduct,
   deleteProduct,
   likeProduct,
-  unlikeProduct
+  unlikeProduct,
+  getProductsByUserId
 };

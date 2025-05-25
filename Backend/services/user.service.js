@@ -50,7 +50,7 @@ const loginUserService = async (body) => {
     const tokenSecret = process.env.TOKEN_SECRET;
 
     return new Promise((resolve, reject) => {
-        jwt.sign(payLoad, tokenSecret, { expiresIn: 3600 }, (err, token) => {
+        jwt.sign(payLoad, tokenSecret, { expiresIn: 864000 }, (err, token) => {
             if (err) {
                 reject({ success: false, status: 500, message: "Internal server error" });
             }
