@@ -66,7 +66,7 @@ function NavBar() {
             <div className="navbar">
                 <nav>
                     <ul className="nav-left">
-                        <li><h1><Link to="/">CycleBay</Link></h1></li>
+                        <li><Link to="/about">About</Link></li>
                         <li><Link to="/">Home</Link></li>
                         <li>
                             <span 

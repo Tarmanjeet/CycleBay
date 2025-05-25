@@ -102,7 +102,6 @@
 }
 
 .price-input::before {
-    content: "₹";
     position: absolute;
     transform: translateY(-50%);
     color: #322C2B;
