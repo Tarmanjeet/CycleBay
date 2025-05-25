@@ -11,6 +11,7 @@ import Sell from './Pages/Sell'
 import ProductDetail from './Pages/ProductDetail'
 import PostAd from './Pages/PostAd'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ManageProducts from './Pages/ManageProducts'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route path="/likedProducts" element={<LikedProducts/>} />
             <Route path="/product/:id" element={<ProductDetail/>}/>
             <Route path="/post-ad" element={<PostAd/>} />
+            <Route path="/manage-products" element={<ManageProducts/>} />
         </Routes>
       </BrowserRouter>
   </>

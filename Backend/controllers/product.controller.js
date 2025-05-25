@@ -4,7 +4,8 @@ const {
   getProductByIdService,
   createProductService,
   updateProductService,
-  deleteProductService
+  deleteProductService,
+  getProductsByUserIdService
 } = require("../services/product.service");
 
 const { Product } = require("../db/models/productSchema");
@@ -164,13 +165,28 @@ const unlikeProduct = async (req, res) => {
 
 const getProductsByUserId = async (req, res) => {
   try {
-    const products = await Product.find({ createdBy: req.params.userId })
-      .sort({ createdAt: -1 });
+    console.log("Fetching products for user:", req.params.userId);
+    console.log("User from token:", req.user); // Log the user object from token
     
-    if (!products) {
-      return res.status(404).json({ success: false, message: "No products found" });
+    if (!req.params.userId) {
+      console.log("No userId provided in params");
+      return res.status(400).json({ 
+        success: false, 
+        message: "User ID is required" 
+      });
     }
 
+    if (!req.user || !req.user.userId) {
+      console.log("No user found in request");
+      return res.status(401).json({
+        success: false,
+        message: "Authentication required"
+      });
+    }
+
+    const products = await getProductsByUserIdService(req.params.userId);
+    console.log("Found products:", products.length);
+    
     return res.status(200).json({
       success: true,
       message: "User products fetched successfully",
@@ -178,7 +194,23 @@ const getProductsByUserId = async (req, res) => {
     });
   } catch (err) {
     console.error("get user products error:", err);
-    return res.status(500).json({ success: false, message: "Server Error" });
+    console.error("Error details:", {
+      name: err.name,
+      message: err.message,
+      stack: err.stack
+    });
+    
+    if (err.name === 'CastError') {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Invalid user ID format" 
+      });
+    }
+    return res.status(500).json({ 
+      success: false, 
+      message: "Server Error",
+      error: err.message 
+    });
   }
 };
 

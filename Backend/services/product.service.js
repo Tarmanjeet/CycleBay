@@ -84,10 +84,28 @@ const deleteProductService = async (id, userId) => {
   return true;
 };
 
+const getProductsByUserIdService = async (userId) => {
+  try {
+    if (!userId) {
+      throw new Error("User ID is required");
+    }
+    
+    const products = await Product.find({ createdBy: userId })
+      .sort({ createdAt: -1 })
+      .populate('createdBy', 'name email');
+      
+    return products;
+  } catch (err) {
+    console.error("getProductsByUserIdService error:", err);
+    throw err;
+  }
+};
+
 module.exports = {
   getAllProductsService,
   getProductByIdService,
   createProductService,
   updateProductService,
-  deleteProductService
+  deleteProductService,
+  getProductsByUserIdService
 };
