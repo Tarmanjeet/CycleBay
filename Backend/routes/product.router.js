@@ -6,7 +6,8 @@ const {
   updateProduct,
   deleteProduct,
   likeProduct,
-  unlikeProduct
+  unlikeProduct,
+  getProductsByUserId
 } = require("../controllers/product.controller");
 
 const { isAuth, ownsProduct } = require("../middlewares/authenticate");
@@ -15,6 +16,7 @@ const {Product} = require("../db/models/productSchema");
 let productRouter = express.Router();
 
 productRouter.get("/", getAllProducts);
+productRouter.get("/user/:userId", getProductsByUserId);
 productRouter.get("/:id", getProductById);
 productRouter.post("/create", isAuth, createProduct);
 productRouter.patch("/update/:id", isAuth, ownsProduct(Product), updateProduct);
