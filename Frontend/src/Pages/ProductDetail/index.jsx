@@ -75,7 +75,7 @@ function ProductDetail() {
       <div className="product-container">
         <div className="content-wrapper">
           <div className="image-wrapper">
-            <img src={product.imgUrl} alt={product.name} className="product-image" />
+            <img src={`http://localhost:3000/uploads/${product.image}`} alt={product.name} className="product-image" />
           </div>
 
           <div className="info-box">

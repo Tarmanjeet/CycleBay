@@ -142,7 +142,7 @@ function Profile() {
                         {userProducts.length > 0 ? (
                             userProducts.map(product => (
                                 <div key={product._id} className="listing-card">
-                                    <img src={product.imgUrl} alt={product.name} />
+                                    <img src={`http://localhost:3000/uploads/${product.image}`} alt={product.name} />
                                     <h3>{product.name}</h3>
                                     <p>${product.price}</p>
                                     <div className="product-actions">

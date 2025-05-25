@@ -22,13 +22,16 @@ app.use("/user",userRouter);
 app.use("/product",productRouter);
 app.use("/order",orderRouter);
 app.use("/wishlist",wishlistRouter);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+app.use((req,res)=>{
+    res.status(404).sendFile(path.join(__dirname,"/404.html"));
+})
 
 app.use("/",(req,res)=>{
     res.status(200).send("Application is running");
 })
-app.use((req,res)=>{
-    res.status(404).sendFile(path.join(__dirname,"/404.html"));
-})
+
 app.listen(3000,(err)=>{
     if(err) console.log("err",err);
     console.log("server listening on 3000");

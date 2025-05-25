@@ -134,7 +134,9 @@ function LikedProducts() {
                         {likedProducts.map(product => (
                             <div key={product._id} className="product-card">
                                 <div className="product-image">
-                                    <img src={product.imgUrl} alt={product.name} />
+                                    <img 
+                                    src={`http://localhost:3000/uploads/${product.image}`} 
+                                    alt={product.name} />
                                     <button 
                                         className="remove-like"
                                         onClick={() => handleRemoveLike(product._id)}>remove</button>

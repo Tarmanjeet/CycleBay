@@ -58,8 +58,15 @@ let getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    console.log("Request body:", req.body);  
-    const product = await createProductService(req.body, req.user.userId);
+    const imageFileName = req.file ? req.file.filename : null;
+
+    const productData = {
+      ...req.body,
+      image: imageFileName,
+      description: JSON.parse(req.body.description), 
+    };
+
+    const product = await createProductService(productData, req.user.userId);
     res.status(201).json(product);
   } catch (error) {
     console.error("create product error:", error);
