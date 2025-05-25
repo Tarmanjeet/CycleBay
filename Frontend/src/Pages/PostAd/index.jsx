@@ -167,7 +167,8 @@ const PostAd = () => {
     <div className="post-ad-page">
       <NavBar />
       <div className="post-ad-container">
-        <h1>POST YOUR AD</h1>
+        <h1>POST YOUR AD<img src="https://cdn-icons-png.flaticon.com/128/1154/1154448.png" alt="Post Ad" />
+</h1>
         <form className="post-ad-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Product Name</label>

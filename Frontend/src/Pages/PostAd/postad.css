@@ -20,6 +20,13 @@
     font-size: 2.5rem;
 }
 
+.post-ad-container h1 img {
+    width: 70px;
+    height: 70px;
+    margin-left:1.2rem;
+    margin-bottom: 1.5rem;
+}
+
 .post-ad-form {
     background: #ffffff;
     padding: 2rem;
@@ -29,6 +36,7 @@
     width: 100%;
     box-sizing: border-box;
 }
+
 
 .form-group {
     margin-bottom: 1.5rem;
