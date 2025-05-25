@@ -1,0 +1,158 @@
+.post-ad-page {
+    min-height: 100vh;
+    background-color: #ffffff;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.post-ad-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.post-ad-container h1 {
+    color: #803D3B;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+}
+
+.post-ad-form {
+    background: #ffffff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(128, 61, 59, 0.1), 0 10px 20px rgba(175, 130, 96, 0.05);
+    border: 2px solid #000000;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #322C2B;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #AF8260;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #322C2B;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-group > div {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form-group > div label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #322C2B;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.form-group > div input,
+.form-group > div select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #AF8260;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #ffffff;
+    color: #322C2B;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.price-input {
+    position: relative;
+}
+
+.price-input::before {
+    content: "₹";
+    position: absolute;
+    transform: translateY(-50%);
+    color: #322C2B;
+}
+
+.price-input input {
+    padding-left: 2rem !important;
+}
+
+.submit-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.submit-button:hover {
+    background-color: #803D3B;
+}
+
+.submit-button:disabled {
+    background-color: #AF8260;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.error-message {
+    color: #803D3B;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.success-message {
+    background-color: rgba(128, 61, 59, 0.1);
+    color: #803D3B;
+    padding: 1rem;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .post-ad-container {
+        padding: 1rem;
+    }
+
+    .post-ad-form {
+        padding: 1.5rem;
+    }
+
+    .post-ad-container h1 {
+        font-size: 2rem;
+    }
+} 

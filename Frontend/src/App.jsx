@@ -9,6 +9,7 @@ import Profile from './Pages/Profile'
 import About from './Pages/About'
 import Sell from './Pages/Sell'
 import ProductDetail from './Pages/ProductDetail'
+import PostAd from './Pages/PostAd'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/sell" element={<Sell/>} />
             <Route path="/likedProducts" element={<LikedProducts/>} />
             <Route path="/product/:id" element={<ProductDetail/>}/>
+            <Route path="/post-ad" element={<PostAd/>} />
         </Routes>
       </BrowserRouter>
   </>
