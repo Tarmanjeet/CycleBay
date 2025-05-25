@@ -5,6 +5,7 @@ const userRouter=require("./routes/user.router");
 const productRouter=require("./routes/product.router");
 const orderRouter=require("./routes/order.router");
 const wishlistRouter=require("./routes/wishlist.router");
+const offerRoutes = require("./routes/offer.router");
 const connection=require("./db/connection");
 const path = require("path");
 const cors = require('cors')
@@ -23,6 +24,7 @@ app.use("/product",productRouter);
 app.use("/order",orderRouter);
 app.use("/wishlist",wishlistRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use('/offer', offerRoutes);
 
 app.use((req,res)=>{
     res.status(404).sendFile(path.join(__dirname,"/404.html"));

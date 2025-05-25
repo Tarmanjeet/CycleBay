@@ -43,16 +43,18 @@ let getAllProducts = async (req, res) => {
   }
 };
 
-let getProductById = async (req, res) => {
+const getProductById = async (req, res) => {
   try {
-    let product = await getProductByIdService(req.params.id);
-    if (!product) {
-      return res.status(404).json({ success: false, message: "Product not found" });
+    const product = await Product.findById(req.params.id)
+      .populate('createdBy', 'name email'); 
+
+    if (!product){ 
+      return res.status(404).json({ success: false, message: 'Product not found' });
     }
-    return res.status(200).json({ success: true, message: "Product fetched successfully", data: product });
+    return res.json({ success: true, data: product });
   } catch (err) {
-    console.error("get product by id error:", err);
-    return res.status(500).json({ success: false, message: "Server Error" });
+    console.error("Error:", err);
+    return res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
 
