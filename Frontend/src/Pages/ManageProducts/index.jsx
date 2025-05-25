@@ -187,7 +187,7 @@ const ManageProducts = () => {
     <div className="manage-products-page">
       <NavBar />
       <div className="manage-products-container">
-        <h1>Manage Your Products</h1>
+        <h1>Manage Your Products <img src="https://cdn-icons-png.flaticon.com/128/2838/2838895.png" alt="Manage Products" /> </h1>
         {products.length === 0 ? (
           <div className="no-products">
             <p>You haven't posted any products yet.</p>
