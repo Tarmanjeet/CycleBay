@@ -1,6 +1,6 @@
 .about-page {
   min-height: 100vh;
-  background-color: #ffffff;
+  background-color: var(--background-primary);
 }
 
 .about-container {
@@ -16,14 +16,14 @@
 
 .about-header h1 {
   font-size: 2.5rem;
-  color: #803D3B;
+  color: var(--text-color);
   margin-bottom: 1rem;
 }
 
 .header-underline {
   width: 100px;
   height: 4px;
-  background-color: #803D3B;
+  background-color: var(--button-bg);
   margin: 0 auto;
   border-radius: 2px;
 }
@@ -35,21 +35,21 @@
 }
 
 .about-section {
-  background-color: white;
+  background-color: var(--card-background);
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 20px 50px rgba(128, 61, 59, 0.1), 0 10px 20px rgba(175, 130, 96, 0.05);
-  border: 2px solid #000000;
+  box-shadow: 0 20px 50px var(--shadow-color);
+  border: 2px solid var(--border-color);
 }
 
 .about-section h2 {
-  color: #803D3B;
+  color: var(--text-color);
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
 }
 
 .about-section p {
-  color: #322C2B;
+  color: var(--text-secondary);
   line-height: 1.6;
   font-size: 1.1rem;
 }
@@ -62,26 +62,26 @@
 }
 
 .feature-card {
-  background-color: #ffffff;
+  background-color: var(--card-background);
   padding: 1.5rem;
   border-radius: 8px;
   transition: transform 0.3s ease;
-  border: 1px solid #AF8260;
+  border: 1px solid var(--border-color);
 }
 
 .feature-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(128, 61, 59, 0.1), 0 10px 20px rgba(175, 130, 96, 0.05);
+  box-shadow: 0 20px 50px var(--shadow-color);
 }
 
 .feature-card h3 {
-  color: #803D3B;
+  color: var(--text-color);
   margin-bottom: 1rem;
   font-size: 1.3rem;
 }
 
 .feature-card p {
-  color: #322C2B;
+  color: var(--text-secondary);
   font-size: 1rem;
 }
 
@@ -91,7 +91,7 @@
 }
 
 .benefits-list li {
-  color: #322C2B;
+  color: var(--text-secondary);
   font-size: 1.1rem;
   margin-bottom: 1rem;
   padding-left: 1.5rem;
@@ -100,7 +100,7 @@
 
 .benefits-list li::before {
   content: "✓";
-  color: #803D3B;
+  color: var(--button-bg);
   position: absolute;
   left: 0;
 }
@@ -111,7 +111,7 @@
 
 .contact-section p {
   font-size: 1.2rem;
-  color: #322C2B;
+  color: var(--text-secondary);
 }
 
 @media (max-width: 768px) {

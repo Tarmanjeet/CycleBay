@@ -119,6 +119,11 @@ let productSchema = new mongoose.Schema({
 });
 
 productSchema.pre("save", function (next) {
+  // Skip validation if only likedBy array is being modified
+  if (this.isModified('likedBy') && Object.keys(this.modifiedPaths()).length === 1) {
+    return next();
+  }
+
   const schema = getDescriptionSchema(this.category);
   const modelName = `TempDescription_${this.category.replace(/\s+/g, '_')}`;
   const TempModel = mongoose.models[modelName] || mongoose.model(modelName, schema);
