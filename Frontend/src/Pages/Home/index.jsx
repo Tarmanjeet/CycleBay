@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../../Components/NavBar';
+import Footer from '../../Components/Footer';
 import './home.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -118,11 +119,8 @@ function Home() {
     }
 
     return (
-        <>
-            <div className="home">
-                <NavBar />
-            </div>
-
+        <div className="home-page">
+            <NavBar />
             <div className="Products-container">
                 <div className="home-nav">
                     <div className="search-section">
@@ -199,7 +197,8 @@ function Home() {
                     )}
                 </div>
             </div>
-        </>
+            <Footer />
+        </div>
     );
 }
 

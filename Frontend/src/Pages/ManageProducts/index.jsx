@@ -62,7 +62,7 @@ const ManageProducts = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.delete(`http://localhost:3000/product/${productId}`, {
+      const response = await axios.delete(`http://localhost:3000/product/delete/${productId}`, {
         headers: {
           'x-access-token': token
         }
@@ -75,7 +75,11 @@ const ManageProducts = () => {
         setError(response.data.message || 'Failed to delete product');
       }
     } catch (err) {
+      console.error('Delete error:', err);
       setError(err.response?.data?.message || 'Error deleting product');
+      if (err.response?.status === 401) {
+        navigate('/signin');
+      }
     }
   };
 
