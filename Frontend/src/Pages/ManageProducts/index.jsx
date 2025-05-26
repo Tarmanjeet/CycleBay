@@ -98,7 +98,7 @@ const ManageProducts = () => {
         desc: editingProduct.desc,
         price: Number(editingProduct.price),
         category: editingProduct.category,
-        imgUrl: editingProduct.imgUrl,
+        image: editingProduct.image,
         description: editingProduct.description
       };
 
@@ -199,7 +199,7 @@ const ManageProducts = () => {
           <div className="products-grid">
             {products.map(product => (
               <div key={product._id} className="product-card">
-                <img src={product.imgUrl} alt={product.name} className="product-image" />
+                <img src={`http://localhost:3000/uploads/${product.image}`} alt={product.name} className="product-image" />
                 <div className="product-info">
                   <h3>{product.name}</h3>
                   <p className="price">{formatPrice(product.price)}</p>
@@ -259,11 +259,11 @@ const ManageProducts = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label>Image URL</label>
+                  <label>Image File</label>
                   <input
                     type="text"
-                    name="imgUrl"
-                    value={editingProduct.imgUrl}
+                    name="image"
+                    value={`http://localhost:3000/uploads/${editingProduct.image}`}
                     onChange={handleInputChange}
                   />
                 </div>
