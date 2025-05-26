@@ -3,11 +3,14 @@ import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
+import logo from '../assets/images/logo1.png';
+import { useTheme } from '../context/ThemeContext';
 
 function NavBar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userEmail, setUserEmail] = useState('');
     const navigate = useNavigate();
+    const { isDarkMode, toggleTheme } = useTheme();
 
     const checkAuth = () => {
         const token = localStorage.getItem('token');
@@ -66,6 +69,11 @@ function NavBar() {
             <div className="navbar">
                 <nav>
                     <ul className="nav-left">
+                        <li className="logo-container">
+                            <Link to="/">
+                                <img src={logo} alt="CycleBay Logo" className="nav-logo" />
+                            </Link>
+                        </li>
                         <li><Link to="/about">About</Link></li>
                         <li><Link to="/">Home</Link></li>
                         <li>
@@ -76,6 +84,17 @@ function NavBar() {
                         </li>
                     </ul>
                     <div className="nav-right">
+                        <button 
+                            className="theme-toggle" 
+                            onClick={toggleTheme}
+                            aria-label="Toggle theme"
+                        >
+                            <img 
+                                src="https://cdn-icons-png.flaticon.com/128/8051/8051743.png"
+                                alt="Theme Toggle"
+                                style={{ width: '24px', height: '24px' }}
+                            />
+                        </button>
                         {isLoggedIn ? (
                             <>
                                 <li>
@@ -86,7 +105,7 @@ function NavBar() {
                                 </li>
                                 <DropdownButton id="dropdown-basic-button" title=<img className="profile-icon" src="https://cdn-icons-png.flaticon.com/128/456/456283.png"></img>>
                                     <Dropdown.Item onClick={() => handleNavigation('/profile')}>Your Profile</Dropdown.Item>
-                                    <Dropdown.Item href="#/action-2">Your Ads</Dropdown.Item>
+                                    {/* <Dropdown.Item href="#/action-2">Your Ads</Dropdown.Item> */}
                                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                                 </DropdownButton>
                                 <span className="user-email">{userEmail}</span>

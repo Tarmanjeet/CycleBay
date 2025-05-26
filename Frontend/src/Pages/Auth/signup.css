@@ -2,7 +2,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #ffffff;
+  background-color: var(--background-primary);
 }
 
 .signup-page {
@@ -10,22 +10,22 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: #ffffff;
+  background: var(--background-primary);
 }
 
 .signup-page .container {
-  background: #ffffff;
+  background: var(--card-background);
   padding: 2rem;
   border-radius: 30px;
-  box-shadow: 0 20px 50px rgba(128, 61, 59, 0.1), 0 10px 20px rgba(175, 130, 96, 0.05);
+  box-shadow: 0 20px 50px var(--shadow-color), 0 10px 20px var(--shadow-color);
   width: 100%;
   max-width: 500px;
-  border: 2px solid #AF8260;
+  border: 2px solid var(--border-color);
 }
 
 .signup-page .container h1 {
   text-align: center;
-  color: #803D3B;
+  color: var(--text-color);
   margin-bottom: 1.5rem;
 }
 
@@ -37,31 +37,31 @@ body {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: bold;
-  color: #322C2B;
+  color: var(--text-color);
 }
 
 .signup-page input {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #AF8260;
+  border: 1px solid var(--border-color);
   border-radius: 5px;
   font-size: 1rem;
   box-sizing: border-box;
-  background-color: #ffffff;
-  color: #322C2B;
+  background-color: var(--input-bg);
+  color: var(--input-text);
 }
 
 .signup-page input:focus {
   outline: none;
-  border-color: #803D3B;
-  box-shadow: 0 0 5px rgba(128, 61, 59, 0.3);
+  border-color: var(--hover-color);
+  box-shadow: 0 0 5px var(--shadow-color);
 }
 
 .signup-page button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #803D3B;
-  color: #ffffff;
+  background-color: var(--button-bg);
+  color: var(--profile-text);
   border: none;
   border-radius: 5px;
   font-size: 1rem;
@@ -70,18 +70,18 @@ body {
 }
 
 .signup-page button:hover {
-  background-color: #AF8260;
+  background-color: var(--button-hover);
 }
 
 .signup-page p {
   text-align: center;
   margin-top: 1rem;
   font-size: 0.9rem;
-  color: #322C2B;
+  color: var(--text-secondary);
 }
 
 .signup-page p a {
-  color: #803D3B;
+  color: var(--hover-color);
   text-decoration: none;
 }
 
