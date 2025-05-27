@@ -64,7 +64,7 @@
 
 .browse-button {
     background-color: var(--button-bg);
-    color: var(--profile-text);
+    color: var(--profile-bg);
     border: none;
     padding: 12px 24px;
     border-radius: 5px;

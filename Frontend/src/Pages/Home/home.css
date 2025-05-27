@@ -23,14 +23,15 @@
     padding: 20px;
     background: var(--card-background);
     border-radius: 15px;
-    box-shadow: 0 4px 15px var(--shadow-color);
+    box-shadow: 10px 10px 10px var(--shadow-color);
+    border: 1px solid #ddd;
     margin-bottom: 30px;
 }
 
 .sort-select {
     padding: 12px 25px;
     background-color: var(--button-bg);
-    color: var(--profile-text);
+    color: var(--profile-bg);
     border: none;
     border-radius: 8px;
     cursor: pointer;
@@ -128,7 +129,7 @@
 
 .category-button.active {
     background-color: var(--button-bg);
-    color: var(--profile-text);
+    color: var(--profile-bg);
     border-color: var(--button-bg);
 }
 
@@ -144,9 +145,10 @@
 
 .Products-Card {
     background: var(--card-background);
-    border-radius: 0px;
-    box-shadow: 0 4px 15px var(--shadow-color);
+    border-radius: 15px;
+    box-shadow: 0px 10px 10px var(--shadow-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #ddd;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -172,6 +174,11 @@
     color: var(--text-color);
     font-size: 1.2rem;
     font-weight: 600;
+}
+
+.Products-Card p {
+    padding: 1px 10px 5px 15px;
+    font-size: 1.1rem;
 }
 
 .Products-Card .description {

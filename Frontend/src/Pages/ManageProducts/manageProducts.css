@@ -103,10 +103,19 @@
     font-weight: 600;
     transition: all 0.3s;
     background-color: var(--button-bg);
-    color: var(--profile-text);
+    color: var(--profile-bg);
 }
 
-.edit-btn:hover, .delete-btn:hover {
+.delete-btn {
+    background-color: var(--button-bg);
+    color: var(--profile-bg);
+}
+
+.edit-btn:hover {
+    background-color: var(--button-hover);
+}
+
+.delete-btn:hover {
     background-color: var(--button-hover);
 }
 

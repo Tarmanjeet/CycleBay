@@ -68,6 +68,8 @@ A MERN stack-powered web application that promotes sustainability through a peer
    cd backend
    
    npm install
+
+   nodemon index.js
    ```
 
 5. **Frontend Setup**

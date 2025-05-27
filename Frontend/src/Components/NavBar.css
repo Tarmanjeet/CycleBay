@@ -51,7 +51,7 @@
     font-style: normal;
     list-style: none;
     display: flex;
-    gap: 50px;
+    gap: 10px;
     margin: 0;
     padding: 0;
 }
@@ -91,7 +91,7 @@
 
 .nav-button {
     background-color: var(--button-bg);
-    color: var(--profile-text) !important;
+    color: var(--profile-bg) !important;
     border: none;
     border-radius: 5px;
     padding: 8px 16px !important;
