@@ -11,24 +11,20 @@ const getAllProductsService = async (
 ) => {
   let query = {};
 
-  // ✅ Search filter
   if (filters.search) {
   query.name = { $regex: filters.search, $options: "i" };
   }
 
-  // ✅ Category filter
   if (filters.category) {
     query.category = filters.category;
   }
 
-  // ✅ Price filter
   if (filters.minPrice || filters.maxPrice) {
     query.price = {};
     if (filters.minPrice) query.price.$gte = Number(filters.minPrice);
     if (filters.maxPrice) query.price.$lte = Number(filters.maxPrice);
   }
 
-  // ✅ Sorting
   let sort = {};
   sort[sortBy] = sortOrder;
 
