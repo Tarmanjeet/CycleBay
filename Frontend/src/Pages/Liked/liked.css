@@ -75,34 +75,68 @@
 
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1400px;
+    padding: 20px;
     margin: 0 auto;
 }
 
 .product-card {
     background: var(--card-background);
-    border-radius: 10px;
+    border-radius: 0px;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
-    box-shadow: 0 2px 10px var(--shadow-color);
-    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    position: relative;
 }
 
 .product-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 25px var(--shadow-color);
 }
 
 .product-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.product-info {
+    padding: 15px;
+}
+
+.product-info h3 {
+    padding: 0 0 5px 0;
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.price {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    margin-top: auto;
+    padding: 15px 0;
+    font-weight: bold;
+}
+
+.description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .remove-like {
@@ -124,30 +158,6 @@
 
 .remove-like:hover {
     transform: scale(1.1);
-}
-
-.product-info {
-    padding: 20px;
-}
-
-.product-info h3 {
-    margin: 0 0 10px;
-    color: var(--text-color);
-    font-size: 1.2rem;
-}
-
-.price {
-    color: var(--text-color);
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin: 10px 0;
-}
-
-.description {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin: 10px 0 20px;
-    line-height: 1.4;
 }
 
 .view-button {
@@ -178,5 +188,19 @@
     .products-grid {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 20px;
+        padding: 10px;
+    }
+
+    .product-card {
+        height: 400px;
+    }
+
+    .product-image {
+        height: 160px;
+    }
+
+    .description {
+        font-size: 0.85rem;
+        -webkit-line-clamp: 2;
     }
 }

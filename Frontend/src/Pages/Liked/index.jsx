@@ -31,7 +31,6 @@ function LikedProducts() {
                 const result = await response.json();
                 const userData = JSON.parse(localStorage.getItem('user') || '{}');
                 
-          
                 const liked = result.data.filter(product => 
                     product.likedBy?.includes(userData.userId)
                 ).map(product => ({
@@ -70,7 +69,6 @@ function LikedProducts() {
                 throw new Error('Failed to remove like');
             }
 
-   
             setLikedProducts(prevProducts => 
                 prevProducts.filter(product => product._id !== productId)
             );
@@ -78,10 +76,6 @@ function LikedProducts() {
             console.error('Error removing like:', error);
             alert('Failed to remove like. Please try again.');
         }
-    };
-
-    const handleViewProduct = (productId) => {
-        navigate(`/product/${productId}`);
     };
 
     const formatPrice = (price) => {
@@ -132,25 +126,25 @@ function LikedProducts() {
                 ) : (
                     <div className="products-grid">
                         {likedProducts.map(product => (
-                            <div key={product._id} className="product-card">
-                                <div className="product-image">
-                                    <img 
+                            <div key={product._id} className="product-card" onClick={() => navigate(`/product/${product._id}`)}>
+                                <img 
                                     src={`http://localhost:3000/uploads/${product.image}`} 
-                                    alt={product.name} />
-                                    <button 
-                                        className="remove-like"
-                                        onClick={() => handleRemoveLike(product._id)}>remove</button>
-                                </div>
+                                    alt={product.name}
+                                    className="product-image"
+                                />
+                                <button 
+                                    className="remove-like"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleRemoveLike(product._id);
+                                    }}
+                                >
+                                    ❌
+                                </button>
                                 <div className="product-info">
                                     <h3>{product.name}</h3>
-                                    <p className="price">{formatPrice(product.price)}</p>
                                     <p className="description">{product.desc}</p>
-                                    <button 
-                                        className="view-button"
-                                        onClick={() => handleViewProduct(product._id)}
-                                    >
-                                        View Details
-                                    </button>
+                                    <p className="price">{formatPrice(product.price)}</p>
                                 </div>
                             </div>
                         ))}

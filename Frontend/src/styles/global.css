@@ -1,16 +1,16 @@
 :root[data-theme="light"] {
-    /* Navbar colors */
+   
     --navbar-bg: rgba(207, 207, 207, 0.4);
     --text-color: rgb(0, 0, 0);
-    --hover-color: #803D3B;
-    --button-bg: #803D3B;
-    --button-hover: #AF8260;
+    --hover-color: #5D2C2A;
+    --button-bg: #5D2C2A;
+    --button-hover: #803D3B;
     --dropdown-bg: rgba(0, 0, 0, 0.8);
     --dropdown-item-hover: rgba(255, 255, 255, 0.1);
     --profile-bg: white;
     --profile-text: black;
 
-    /* Global colors */
+  
     --background-primary: #ffffff;
     --background-secondary: #f5f5f5;
     --card-background: #ffffff;
@@ -23,19 +23,19 @@
 }
 
 :root[data-theme="dark"] {
-    /* Navbar colors */
+
     --navbar-bg: rgba(30, 30, 30, 0.8);
     --text-color: rgb(255, 255, 255);
-    --hover-color: #AF8260;
-    --button-bg: #AF8260;
+    --hover-color: #5D2C2A;
+    --button-bg: #5D2C2A;
     --button-hover: #803D3B;
     --dropdown-bg: rgba(40, 40, 40, 0.95);
     --dropdown-item-hover: rgba(255, 255, 255, 0.05);
     --profile-bg: #2d2d2d;
     --profile-text: white;
 
-    /* Global colors */
-    --background-primary: #1a1a1a;
+   
+    --background-primary: #212121;
     --background-secondary: #2d2d2d;
     --card-background: #2d2d2d;
     --border-color: #404040;
@@ -46,7 +46,7 @@
     --input-text: #ffffff;
 }
 
-/* Global styles */
+
 html, body, #root {
     background-color: var(--background-primary);
     color: var(--text-color);
@@ -59,7 +59,7 @@ body {
     padding: 0;
 }
 
-/* Card styles */
+
 .card, .container, .Products-Card {
     background-color: var(--card-background);
     border-color: var(--border-color);
@@ -67,7 +67,7 @@ body {
     color: var(--text-color);
 }
 
-/* Text styles */
+
 h1, h2, h3, h4, h5, h6 {
     color: var(--text-color);
 }
@@ -76,7 +76,7 @@ p, span {
     color: var(--text-secondary);
 }
 
-/* Form elements */
+
 input, textarea, select {
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
@@ -88,7 +88,7 @@ input:focus, textarea:focus, select:focus {
     outline: none;
 }
 
-/* Button styles */
+
 button {
     background-color: var(--button-bg);
     color: var(--profile-text);
@@ -100,7 +100,7 @@ button:hover {
     background-color: var(--button-hover);
 }
 
-/* Links */
+
 a {
     color: var(--text-color);
     transition: color 0.3s ease;

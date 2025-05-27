@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import NavBar from '../../Components/NavBar';
-import Footer from '../../Components/Footer';
 import './home.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -13,7 +12,6 @@ function Home() {
     const [minPrice, setMinPrice] = useState("");
     const [maxPrice, setMaxPrice] = useState("");
     const [sortBy, setSortBy] = useState("");
-
 
     useEffect(() => {
     const fetchProducts = async () => {
@@ -142,7 +140,7 @@ function Home() {
                             <button 
                                 key={index} 
                                 className={`category-button ${selectedCategory === category ? 'active' : ''}`}
-        onClick={() => setSelectedCategory(category)}
+                                onClick={() => setSelectedCategory(category)}
                             >
                                 {category}
                             </button>
@@ -173,6 +171,7 @@ function Home() {
                                     alt={product.name} 
                                 />
                                 <h3>{product.name}</h3>
+                                <p className="description">{product.desc}</p>
                                 <button 
                                     className="likeIcon" 
                                     onClick={(e) => {
@@ -184,7 +183,7 @@ function Home() {
                                         src={product.isLiked 
                                             ? "https://cdn-icons-png.flaticon.com/128/2589/2589175.png"
                                             : "https://cdn-icons-png.flaticon.com/128/2589/2589197.png"
-                                        } // https://cdn-icons-png.flaticon.com/128/2589/2589175.png
+                                        }
                                         alt="Like"
                                         style={{ width: '100%', height: '100%' }}
                                     />
@@ -197,7 +196,6 @@ function Home() {
                     )}
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

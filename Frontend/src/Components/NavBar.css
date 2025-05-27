@@ -228,10 +228,6 @@ button#dropdown-basic-button {
     transform: scale(1.1);
 }
 
-.theme-toggle:focus {
-    outline: none;
-    box-shadow: 0 0 0 2px var(--hover-color);
-}
 
 .theme-toggle img {
     filter: var(--text-color) brightness(0) saturate(100%);
