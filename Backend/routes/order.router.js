@@ -6,16 +6,14 @@ import {
   getAllOrders,
   updateOrderStatus
 } from "../controllers/order.controller.js";
-
 import { isAuth, isSuperAdmin } from "../middlewares/authenticate.js";
 
-const router = express.Router();
+const orderRouter = express.Router();
 
-router.post("/create", isAuth, createOrder);
-router.get("/my-orders", isAuth, getUserOrders);
-router.get("/:id", isAuth, getOrderById);
+orderRouter.post("/create", isAuth, createOrder);
+orderRouter.get("/my-orders", isAuth, getUserOrders);
+orderRouter.get("/:id", isAuth, getOrderById);
+orderRouter.get("/", isAuth, isSuperAdmin, getAllOrders);
+orderRouter.patch("/update-status/:id", isAuth, isSuperAdmin, updateOrderStatus);
 
-router.get("/", isAuth, isSuperAdmin, getAllOrders);
-router.patch("/update-status/:id", isAuth, isSuperAdmin, updateOrderStatus);
-
-export default router;
+export default orderRouter;
