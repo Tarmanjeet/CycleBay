@@ -10,37 +10,33 @@ const {
 
 const { Product } = require("../db/models/productSchema");
 
-let getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
   try {
-    const filters = {
-      search: req.query.search,
-      category: req.query.category,
-      minPrice: req.query.minPrice,
-      maxPrice: req.query.maxPrice,
-      tags: req.query.tags,
-    };
+    const {
+      search,
+      category,
+      minPrice,
+      maxPrice,
+      sortBy,
+      sortOrder,
+      page = 1,
+      limit = 100,
+    } = req.query;
 
-    const sortBy = req.query.sortBy || "createdAt";
-    const sortOrder = req.query.sortOrder === "-1" ? -1 : 1;
- 
+    const filters = { search, category, minPrice, maxPrice };
 
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 100;
+    const products = await getAllProductsService(
+      filters,
+      sortBy || "createdAt",
+      Number(sortOrder) || -1,
+      Number(page),
+      Number(limit)
+    );
 
-    let allProducts = await getAllProductsService(filters, sortBy, sortOrder, page, limit);
-
-    if (allProducts.length === 0) {
-      return res.status(404).json({ success: false, message: "No products found" });
-    }
-
-    return res.status(200).json({
-      success: true,
-      message: "All products fetched successfully",
-      data: allProducts,
-    });
+    return res.status(200).json(products); 
   } catch (err) {
-    console.error("get all products error:", err);
-    return res.status(500).json({ success: false, message: "Server Error" });
+    console.error("getAllProducts error:", err);
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
