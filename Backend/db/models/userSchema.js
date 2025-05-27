@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -30,4 +30,4 @@ const userSchema = new mongoose.Schema({
   wishlist: [{ type: mongoose.Schema.Types.ObjectId, ref: "Product" }]
 });
 
-module.exports = mongoose.model("users", userSchema);
+export const User = mongoose.model("users", userSchema);

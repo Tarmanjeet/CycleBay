@@ -1,8 +1,8 @@
-const {
+import {
   getWishlistService,
   addToWishlistService,
   removeFromWishlistService
-} = require("../services/wishlist.service");
+} from "../services/wishlist.service.js";
 
 const getWishlist = async (req, res) => {
   try {
@@ -34,7 +34,7 @@ const removeFromWishlist = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getWishlist,
   addToWishlist,
   removeFromWishlist

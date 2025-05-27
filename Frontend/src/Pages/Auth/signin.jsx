@@ -35,9 +35,11 @@ const SignIn = () => {
       if (response.data.success && response.data.token) {
         const { token } = response.data;
         
-        localStorage.setItem('token', token);
+        // Ensure token is properly formatted before storing
+        const cleanToken = token.trim();
+        localStorage.setItem('token', cleanToken);
         
-        const tokenParts = token.split('.');
+        const tokenParts = cleanToken.split('.');
         if (tokenParts.length === 3) {
           const payload = JSON.parse(atob(tokenParts[1]));
           const userData = {

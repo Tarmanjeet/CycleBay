@@ -1,10 +1,10 @@
-const express = require("express");
-const { isAuth } = require("../middlewares/authenticate");
-const {
+import express from "express";
+import { isAuth } from "../middlewares/authenticate.js";
+import {
   getWishlist,
   addToWishlist,
   removeFromWishlist
-} = require("../controllers/wishlist.controller");
+} from "../controllers/wishlist.controller.js";
 
 const wishlistRouter = express.Router();
 
@@ -12,4 +12,4 @@ wishlistRouter.get("/", isAuth, getWishlist);
 wishlistRouter.post("/add/:productId", isAuth, addToWishlist); 
 wishlistRouter.delete("/remove/:productId", isAuth, removeFromWishlist); 
 
-module.exports = wishlistRouter;
+export default wishlistRouter;

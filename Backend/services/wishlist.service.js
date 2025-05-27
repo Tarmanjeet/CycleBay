@@ -1,5 +1,5 @@
-const User = require("../db/models/userSchema");
-const { Product } = require("../db/models/productSchema");
+import { User } from "../db/models/userSchema.js";
+import { Product } from "../db/models/productSchema.js";
 
 const getWishlistService = async (userId) => {
   const user = await User.findById(userId).populate("wishlist");
@@ -24,7 +24,7 @@ const removeFromWishlistService = async (userId, productId) => {
   return true;
 };
 
-module.exports = {
+export {
   getWishlistService,
   addToWishlistService,
   removeFromWishlistService

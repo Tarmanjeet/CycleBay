@@ -1,7 +1,9 @@
-const jwt = require("jsonwebtoken");
-const tokenSecret = process.env.TOKEN_SECRET;
+import jwt from "jsonwebtoken";
 
-const isAuth = (req, res, next) => {
+
+const tokenSecret = process.env.TOKEN_SECRET || 'cyclebay_secure_jwt_secret_key_2024';
+
+export const isAuth = (req, res, next) => {
   const token = req.headers["x-access-token"];
 
   if (!token) {
@@ -14,11 +16,16 @@ const isAuth = (req, res, next) => {
     next();
   } catch (err) {
     console.error("JWT Verification Error:", err.message);
+    if (err.name === 'JsonWebTokenError') {
+      return res.status(401).json({ success: false, message: "Invalid token signature" });
+    } else if (err.name === 'TokenExpiredError') {
+      return res.status(401).json({ success: false, message: "Token has expired" });
+    }
     return res.status(401).json({ success: false, message: "Invalid or expired token" });
   }
 };
 
-function ownsProduct(Product) {
+export const ownsProduct = (Product) => {
   return async (req, res, next) => {
     try {
       console.log("Inside ownsProduct middleware, checking product ownership...");
@@ -37,17 +44,11 @@ function ownsProduct(Product) {
       next(err);
     }
   };
-}
+};
 
-const isSuperAdmin = (req, res, next) => {
+export const isSuperAdmin = (req, res, next) => {
   if (!req.user || req.user.type !== "superadmin") {
     return res.status(403).json({ success: false, message: "You are not a super admin" });
   }
   next();
-};
-
-module.exports = {
-  isAuth,
-  ownsProduct,
-  isSuperAdmin
 };

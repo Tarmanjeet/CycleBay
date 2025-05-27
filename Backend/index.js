@@ -1,16 +1,23 @@
-const express=require("express");
-const bodyParser=require("body-parser");
-const dotenv=require("dotenv").config();
-const userRouter=require("./routes/user.router");
-const productRouter=require("./routes/product.router");
-const orderRouter=require("./routes/order.router");
-const wishlistRouter=require("./routes/wishlist.router");
-const offerRoutes = require("./routes/offer.router");
-const connection=require("./db/connection");
-const path = require("path");
-const cors = require('cors')
+import express from "express";
+import bodyParser from "body-parser";
+import dotenv from "dotenv";
+import userRouter from "./routes/user.router.js";
+import productRouter from "./routes/product.router.js";
+import orderRouter from "./routes/order.router.js";
+import wishlistRouter from "./routes/wishlist.router.js";
+import offerRoutes from "./routes/offer.router.js";
+import messageRouter from "./routes/message.route.js";
+import path from "path";
+import cors from "cors";
+import { fileURLToPath } from "url";
+import "./db/connection.js";  
 
-const app=express();
+dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const app = express();
 
 app.use(cors({
     origin: '*',
@@ -19,22 +26,22 @@ app.use(cors({
 }));
 
 app.use(bodyParser.json());
-app.use("/user",userRouter);
-app.use("/product",productRouter);
-app.use("/order",orderRouter);
-app.use("/wishlist",wishlistRouter);
+app.use("/user", userRouter);
+app.use("/product", productRouter);
+app.use("/order", orderRouter);
+app.use("/wishlist", wishlistRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use('/offer', offerRoutes);
+app.use('/message', messageRouter);
+app.use((req, res) => {
+    res.status(404).sendFile(path.join(__dirname, "/404.html"));
+});
 
-app.use((req,res)=>{
-    res.status(404).sendFile(path.join(__dirname,"/404.html"));
-})
-
-app.use("/",(req,res)=>{
+app.use("/", (req, res) => {
     res.status(200).send("Application is running");
-})
+});
 
-app.listen(3000,(err)=>{
-    if(err) console.log("err",err);
+app.listen(3000, (err) => {
+    if(err) console.log("err", err);
     console.log("server listening on 3000");
-})
+});

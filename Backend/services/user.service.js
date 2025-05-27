@@ -1,9 +1,12 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const users = require("../db/models/userSchema");
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import { User } from "../db/models/userSchema.js";
+
+// Use a consistent fallback secret if environment variable is not set
+const tokenSecret = process.env.TOKEN_SECRET || 'cyclebay_secure_jwt_secret_key_2024';
 
 const registerUserService = async (body) => {
-    let existingUser = await users.findOne({ email: body.email });
+    let existingUser = await User.findOne({ email: body.email });
     if (existingUser && Object.keys(existingUser).length) {
         return { success: false, status: 400, message: "User already exists" };
     }
@@ -11,7 +14,7 @@ const registerUserService = async (body) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(body.password, salt);
 
-    let newUser = new users({
+    let newUser = new User({
         name: body.name,
         email: body.email,
         password: hashedPassword,
@@ -29,7 +32,7 @@ const registerUserService = async (body) => {
 
 const loginUserService = async (body) => {
     const { email, password } = body;
-    const user = await users.findOne({ email });
+    const user = await User.findOne({ email });
 
     if (!user) {
         return { success: false, status: 400, message: "User not found" };
@@ -47,11 +50,10 @@ const loginUserService = async (body) => {
         email: user.email
     };
 
-    const tokenSecret = process.env.TOKEN_SECRET;
-
     return new Promise((resolve, reject) => {
-        jwt.sign(payLoad, tokenSecret, { expiresIn: 864000 }, (err, token) => {
+        jwt.sign(payLoad, tokenSecret, { expiresIn: '24h' }, (err, token) => {
             if (err) {
+                console.error("Token generation error:", err);
                 reject({ success: false, status: 500, message: "Internal server error" });
             }
             resolve({
@@ -65,7 +67,7 @@ const loginUserService = async (body) => {
 };
 
 const updateUserService = async (id, body) => {
-    let user = await users.findById(id);
+    let user = await User.findById(id);
     if (!user) {
         return { success: false, status: 400, message: "User not found" };
     }
@@ -85,14 +87,14 @@ const updateUserService = async (id, body) => {
 };
 
 const deleteUserService = async (id) => {
-    const deletedUser = await users.findByIdAndDelete(id);
+    const deletedUser = await User.findByIdAndDelete(id);
     if (!deletedUser) {
         return { success: false, status: 400, message: "User not found" };
     }
     return { success: true, status: 200, message: "User deleted successfully" };
 };
 
-module.exports = {
+export {
     registerUserService,
     loginUserService,
     updateUserService,

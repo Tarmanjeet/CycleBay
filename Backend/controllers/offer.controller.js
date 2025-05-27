@@ -1,6 +1,6 @@
-const { sendOfferEmail } = require('../services/offer.service');
+import { sendOfferEmail } from '../services/offer.service.js';
 
-const handleSendOffer = async (req, res) => {
+export const handleSendOffer = async (req, res) => {
   const { sellerEmail, buyerName, productName } = req.body;
 
   if (!sellerEmail || !buyerName || !productName) {
@@ -14,8 +14,4 @@ const handleSendOffer = async (req, res) => {
     console.error('Email error:', err);
     return res.status(500).json({ success: false, message: 'Failed to send email' });
   }
-};
-
-module.exports = {
-  handleSendOffer
 };
