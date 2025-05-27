@@ -74,8 +74,8 @@ function NavBar() {
                                 <img src={logo} alt="CycleBay Logo" className="nav-logo" />
                             </Link>
                         </li>
-                        <li><Link to="/about">About</Link></li>
                         <li><Link to="/">Home</Link></li>
+                        <li><Link to="/about">About</Link></li>
                         <li>
                             <span 
                                 onClick={() => handleNavigation('/sell')}>

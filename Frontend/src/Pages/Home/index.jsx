@@ -173,6 +173,7 @@ function Home() {
                                     alt={product.name} 
                                 />
                                 <h3>{product.name}</h3>
+                                <p>{product.desc}</p>
                                 <button 
                                     className="likeIcon" 
                                     onClick={(e) => {

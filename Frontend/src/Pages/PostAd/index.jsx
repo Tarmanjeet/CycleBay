@@ -107,6 +107,7 @@ const PostAd = () => {
         },
       });
       console.log("Product added:", response.data);
+      alert("Congratulation! Product was added successfully")
 
     // Reset form
       setFormData({

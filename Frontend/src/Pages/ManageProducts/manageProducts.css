@@ -94,12 +94,12 @@
 
 .edit-btn {
     background-color: var(--button-bg);
-    color: var(--profile-text);
+    color: var(--profile-bg);
 }
 
 .delete-btn {
     background-color: var(--button-bg);
-    color: var(--profile-text);
+    color: var(--profile-bg);
 }
 
 .edit-btn:hover {
