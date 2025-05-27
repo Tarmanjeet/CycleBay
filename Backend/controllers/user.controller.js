@@ -1,5 +1,5 @@
-const { validationResult } = require("express-validator");
-const {registerUserService,loginUserService,updateUserService,deleteUserService} = require("../services/user.service");
+import { validationResult } from "express-validator";
+import { registerUserService, loginUserService, updateUserService, deleteUserService } from "../services/user.service.js";
 
 const registerUser = async (req, res) => {
     let errors = validationResult(req);
@@ -47,7 +47,7 @@ const deleteUser = async (req, res) => {
     }
 };
 
-module.exports = {
+export {
     registerUser,
     loginUser,
     updateUser,

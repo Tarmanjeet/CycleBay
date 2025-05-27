@@ -1,5 +1,5 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   getAllProducts,
   getProductById,
   createProduct,
@@ -8,11 +8,11 @@ const {
   likeProduct,
   unlikeProduct,
   getProductsByUserId
-} = require("../controllers/product.controller");
+} from "../controllers/product.controller.js";
 
-const { isAuth, ownsProduct } = require("../middlewares/authenticate");
-const {Product} = require("../db/models/productSchema");
-const upload = require("../middlewares/upload");
+import { isAuth, ownsProduct } from "../middlewares/authenticate.js";
+import { Product } from "../db/models/productSchema.js";
+import upload from "../middlewares/upload.js";
 
 let productRouter = express.Router();
 
@@ -25,4 +25,4 @@ productRouter.get("/:id", getProductById);
 productRouter.patch("/update/:id", isAuth, ownsProduct(Product), updateProduct);
 productRouter.delete("/delete/:id", isAuth, ownsProduct(Product), deleteProduct);
 
-module.exports = productRouter;
+export default productRouter;

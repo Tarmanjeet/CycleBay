@@ -92,7 +92,6 @@ function NavBar() {
                             <img 
                                 src="https://cdn-icons-png.flaticon.com/128/8051/8051743.png"
                                 alt="Theme Toggle"
-                                style={{ width: '24px', height: '24px' }}
                             />
                         </button>
                         {isLoggedIn ? (
@@ -101,6 +100,11 @@ function NavBar() {
                                     <span 
                                         onClick={() => handleNavigation('/likedProducts')}>
                                         <img className="likedIcon" src="https://cdn-icons-png.flaticon.com/128/2332/2332042.png"></img>
+                                    </span>
+                                </li>
+                                <li>
+                                    <span onClick={() => handleNavigation('/messages')}>
+                                        <img className="messageIcon" src="https://cdn-icons-png.flaticon.com/128/134/134909.png" alt="Messages"></img>
                                     </span>
                                 </li>
                                 <DropdownButton id="dropdown-basic-button" title=<img className="profile-icon" src="https://cdn-icons-png.flaticon.com/128/2102/2102633.png"></img>>

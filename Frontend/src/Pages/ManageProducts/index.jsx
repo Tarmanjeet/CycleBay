@@ -96,7 +96,7 @@ const ManageProducts = () => {
         return;
       }
 
-      // Prepare the update data
+ 
       const updateData = {
         name: editingProduct.name,
         desc: editingProduct.desc,
@@ -149,7 +149,7 @@ const ManageProducts = () => {
         }
       }));
     } else {
-      // Handle top-level fields
+   
       setEditingProduct(prev => ({
         ...prev,
         [name]: value
@@ -202,26 +202,27 @@ const ManageProducts = () => {
         ) : (
           <div className="products-grid">
             {products.map(product => (
-              <div key={product._id} className="product-card">
-                <img src={`http://localhost:3000/uploads/${product.image}`} alt={product.name} className="product-image" />
-                <div className="product-info">
-                  <h3>{product.name}</h3>
-                  <p className="price">{formatPrice(product.price)}</p>
-                  <p className="description">{product.desc}</p>
-                  <div className="product-actions">
-                    <button 
-                      onClick={() => handleEdit(product)}
-                      className="edit-btn"
-                    >
-                      Edit
-                    </button>
-                    <button 
-                      onClick={() => handleDelete(product._id)}
-                      className="delete-btn"
-                    >
-                      Delete
-                    </button>
-                  </div>
+              <div key={product._id} className="Products-Card">
+                <img 
+                  src={`http://localhost:3000/uploads/${product.image}`} 
+                  alt={product.name}
+                />
+                <h3>{product.name}</h3>
+                <p className="description">{product.desc}</p>
+                <h3 className="price">{formatPrice(product.price)}</h3>
+                <div className="product-actions">
+                  <button 
+                    onClick={() => handleEdit(product)}
+                    className="edit-btn"
+                  >
+                    Edit
+                  </button>
+                  <button 
+                    onClick={() => handleDelete(product._id)}
+                    className="delete-btn"
+                  >
+                    Sold
+                  </button>
                 </div>
               </div>
             ))}

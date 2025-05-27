@@ -1,4 +1,4 @@
-const mongoose=require("mongoose");
+import mongoose from "mongoose";
 
 const mongoUrl="mongodb+srv://cyclebay:xJlMX7gwQVqdXhfl@cluster0.2zcpzam.mongodb.net/cyclebay";
 mongoose.connect(mongoUrl)

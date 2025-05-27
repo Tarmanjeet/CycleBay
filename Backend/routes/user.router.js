@@ -1,6 +1,7 @@
-const express = require("express");
-const { check } = require("express-validator");
-const {registerUser,loginUser,updateUser,deleteUser} = require("../controllers/user.controller");
+import express from "express";
+import { check } from "express-validator";
+import { registerUser, loginUser, updateUser, deleteUser } from "../controllers/user.controller.js";
+
 const userRouter = express.Router();
 
 userRouter.post(
@@ -21,4 +22,4 @@ userRouter.post(
 userRouter.patch("/update/:id", updateUser); 
 userRouter.delete("/delete/:id", deleteUser);
 
-module.exports=userRouter;
+export default userRouter;

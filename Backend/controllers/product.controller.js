@@ -1,14 +1,14 @@
-const path = require("path");
-const {
+import path from "path";
+import {
   getAllProductsService,
   getProductByIdService,
   createProductService,
   updateProductService,
   deleteProductService,
   getProductsByUserIdService
-} = require("../services/product.service");
+} from "../services/product.service.js";
 
-const { Product } = require("../db/models/productSchema");
+import { Product } from "../db/models/productSchema.js";
 
 let getAllProducts = async (req, res) => {
   try {
@@ -214,7 +214,7 @@ const getProductsByUserId = async (req, res) => {
   }
 };
 
-module.exports = {
+export {
   getAllProducts,
   getProductById,
   createProduct,

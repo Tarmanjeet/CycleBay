@@ -1,21 +1,21 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   createOrder,
   getUserOrders,
   getOrderById,
   getAllOrders,
   updateOrderStatus
-} = require("../controllers/order.controller");
+} from "../controllers/order.controller.js";
 
-const { isAuth, isSuperAdmin } = require("../middlewares/authenticate");
+import { isAuth, isSuperAdmin } from "../middlewares/authenticate.js";
 
-const orderRouter = express.Router();
+const router = express.Router();
 
-orderRouter.post("/create", isAuth, createOrder);
-orderRouter.get("/my-orders", isAuth, getUserOrders);
-orderRouter.get("/:id", isAuth, getOrderById);
+router.post("/create", isAuth, createOrder);
+router.get("/my-orders", isAuth, getUserOrders);
+router.get("/:id", isAuth, getOrderById);
 
-orderRouter.get("/", isAuth, isSuperAdmin, getAllOrders);
-orderRouter.patch("/update-status/:id", isAuth, isSuperAdmin, updateOrderStatus);
+router.get("/", isAuth, isSuperAdmin, getAllOrders);
+router.patch("/update-status/:id", isAuth, isSuperAdmin, updateOrderStatus);
 
-module.exports = orderRouter;
+export default router;

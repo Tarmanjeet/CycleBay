@@ -14,48 +14,40 @@ function Home() {
     const [sortBy, setSortBy] = useState("");
 
     useEffect(() => {
-    const fetchProducts = async () => {
-        try {
-            const token = localStorage.getItem('token');
-            const headers = token ? { 'x-access-token': token } : {};
-
-            const params = new URLSearchParams();
-            if (selectedCategory !== "All") params.append("category", selectedCategory);
-            if (minPrice) params.append("minPrice", minPrice);
-            if (maxPrice) params.append("maxPrice", maxPrice);
-            if (sortBy) {
-                const [field, order] = sortBy.split("-");
-                params.append("sortBy", field);
-                params.append("sortOrder", order === "asc" ? "1" : "-1");
-            }
-            if (searchTerm) params.append("search", searchTerm);
-
-            const response = await fetch(`http://localhost:3000/product?${params.toString()}`, {
-                headers: {
-                    ...headers,
-                    'Content-Type': 'application/json'
+        const fetchProducts = async () => {
+            try {
+                const params = new URLSearchParams();
+                if (selectedCategory !== "All") params.append("category", selectedCategory);
+                if (minPrice) params.append("minPrice", minPrice);
+                if (maxPrice) params.append("maxPrice", maxPrice);
+                if (sortBy) {
+                    const [field, order] = sortBy.split("-");
+                    params.append("sortBy", field);
+                    params.append("sortOrder", order === "asc" ? "1" : "-1");
                 }
-            });
+                if (searchTerm) params.append("search", searchTerm);
 
-            if (!response.ok) throw new Error(`Failed to fetch: ${response.statusText}`);
-            const result = await response.json();
+                const response = await fetch(`http://localhost:3000/product?${params.toString()}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch products');
+                }
+                const result = await response.json();
 
-            const userData = JSON.parse(localStorage.getItem('user') || '{}');
-            const updatedProducts = (result.data || result).map(product => ({
-                ...product,
-                isLiked: product.likedBy?.includes(userData.userId) || false,
-            }));
-            setProducts(updatedProducts);
+                const userData = JSON.parse(localStorage.getItem('user') || '{}');
+                const updatedProducts = (result.data || result).map(product => ({
+                    ...product,
+                    isLiked: product.likedBy?.includes(userData.userId) || false,
+                }));
+                setProducts(updatedProducts);
 
-        } catch (err) {
-            console.error("Error fetching products:", err);
-            setError("Something went wrong while fetching products.");
-        }
-    };
+            } catch (err) {
+                console.error("Error fetching products:", err);
+                setError("Something went wrong while fetching products.");
+            }
+        };
 
-    fetchProducts();
-}, [selectedCategory, minPrice, maxPrice, sortBy, searchTerm]);
-
+        fetchProducts();
+    }, [selectedCategory, minPrice, maxPrice, sortBy, searchTerm]);
 
     const categories = [
         "All",
@@ -92,23 +84,34 @@ function Home() {
             const response = await fetch(`http://localhost:3000/product/${endpoint}/${productId}`, {
                 method: 'POST',
                 headers: {
-                    "x-access-token": token,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'x-access-token': token
                 }
             });
 
             if (!response.ok) {
+                if (response.status === 401) {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                    navigate('/signin');
+                    return;
+                }
                 throw new Error('Failed to update like status');
             }
 
-            setProducts(prevProducts => 
-                prevProducts.map((p, i) =>
-                    i === index ? { ...p, isLiked: !p.isLiked } : p
-                )
-            );
+            const data = await response.json();
+            if (data.success) {
+                setProducts(prevProducts => 
+                    prevProducts.map((p, i) =>
+                        i === index ? { ...p, isLiked: !p.isLiked } : p
+                    )
+                );
+            } else {
+                throw new Error(data.message || 'Failed to update like status');
+            }
         } catch (error) {
             console.error('Error updating like status:', error);
-            alert('Failed to update like status. Please try again.');
+            alert(error.message || 'Failed to update like status. Please try again.');
         }
     };
     

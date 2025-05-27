@@ -74,6 +74,57 @@ function Profile() {
         navigate('/signin');
     };
 
+    const handleProfileImageChange = async (event) => {
+        const file = event.target.files[0];
+        if (!file) return;
+
+       
+        if (!file.type.startsWith('image/')) {
+            alert('Please select an image file');
+            return;
+        }
+
+    
+        if (file.size > 5 * 1024 * 1024) {
+            alert('Image size should be less than 5MB');
+            return;
+        }
+
+        try {
+            setLoading(true);
+            const formData = new FormData();
+            formData.append('profileImage', file);
+
+            const token = localStorage.getItem('token');
+            const response = await fetch('http://localhost:3000/user/update-profile-image', {
+                method: 'POST',
+                headers: {
+                    'x-access-token': token
+                },
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to update profile image');
+            }
+
+            const result = await response.json();
+            if (result.success) {
+                setUserData(prev => ({
+                    ...prev,
+                    profileImage: result.data.profileImage
+                }));
+            } else {
+                throw new Error(result.message || 'Failed to update profile image');
+            }
+        } catch (err) {
+            console.error('Error updating profile image:', err);
+            alert(err.message || 'Failed to update profile image');
+        } finally {
+            setLoading(false);
+        }
+    };
+
     if (loading) {
         return (
             <div className="profile-container">
@@ -119,20 +170,40 @@ function Profile() {
             <NavBar />
             <div className="profile-content">
                 <div className="profile-header">
-                    <div className="profile-info">
-                        <h1>{userData.name}</h1>
-                        <p className="join-date">Member since {userData.createdAt}</p>
-                    </div>
-                </div>
-
-                <div className="profile-details">
-                    <div className="detail-item">
-                        <h3>Email</h3>
-                        <p>{userData.email}</p>
-                    </div>
-                    <div className="detail-item">
-                        <h3>Account Type</h3>
-                        <p>{userData.type}</p>
+                    <div className="profile-content-wrapper">
+                        <div className="profile-image-section">
+                            <div className="profile-image-container">
+                                <img 
+                                    src={userData.profileImage || "https://cdn-icons-png.flaticon.com/128/2102/2102633.png"} 
+                                    alt="Profile" 
+                                    className="profile-image"
+                                />
+                                <label htmlFor="profile-image-input" className="edit-image-btn">
+                                    Change Photo
+                                </label>
+                                <input 
+                                    type="file" 
+                                    id="profile-image-input" 
+                                    accept="image/*"
+                                    onChange={handleProfileImageChange}
+                                    style={{ display: 'none' }}
+                                />
+                            </div>
+                        </div>
+                        <div className="profile-info">
+                            <h1>{userData.name}</h1>
+                            <p className="join-date">Member since {userData.createdAt}</p>
+                            <div className="profile-details">
+                                <div className="detail-item">
+                                    <h3>Email</h3>
+                                    <p>{userData.email}</p>
+                                </div>
+                                <div className="detail-item">
+                                    <h3>Account Type</h3>
+                                    <p>{userData.type}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -156,7 +227,7 @@ function Profile() {
                                             className="delete-btn"
                                             onClick={() => handleDeleteProduct(product._id)}
                                         >
-                                            Delete
+                                            Sold
                                         </button>
                                     </div>
                                 </div>

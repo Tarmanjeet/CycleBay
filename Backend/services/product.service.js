@@ -1,6 +1,6 @@
-const { Product, getDescriptionSchema } = require("../db/models/productSchema");
-const mongoose = require("mongoose");
-const path = require("path");
+import { Product, getDescriptionSchema } from "../db/models/productSchema.js";
+import mongoose from "mongoose";
+import path from "path";
 
 const getAllProductsService = async (
   filters = {},
@@ -101,7 +101,7 @@ const getProductsByUserIdService = async (userId) => {
   }
 };
 
-module.exports = {
+export {
   getAllProductsService,
   getProductByIdService,
   createProductService,

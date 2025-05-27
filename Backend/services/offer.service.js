@@ -1,7 +1,9 @@
-const nodemailer = require('nodemailer');
-require('dotenv').config();
+import nodemailer from 'nodemailer';
+import dotenv from 'dotenv';
 
-async function sendOfferEmail(sellerEmail, buyerName, productName) {
+dotenv.config();
+
+export async function sendOfferEmail(sellerEmail, buyerName, productName) {
   const transporter = nodemailer.createTransport({
     service: 'Gmail', 
     auth: {
@@ -24,7 +26,3 @@ async function sendOfferEmail(sellerEmail, buyerName, productName) {
 
   await transporter.sendMail(mailOptions);
 }
-
-module.exports = {
-  sendOfferEmail
-};

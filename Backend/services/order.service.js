@@ -1,7 +1,7 @@
-const Order = require("../db/models/orderSchema");
-const { Product } = require("../db/models/productSchema");
+import { Order } from "../db/models/orderSchema.js";
+import { Product } from "../db/models/productSchema.js";
 
-const createOrder = async (userId, body) => {
+export const createOrder = async (userId, body) => {
   const { products, address, paymentMethod } = body;
 
   let totalPrice = 0;
@@ -35,7 +35,7 @@ const createOrder = async (userId, body) => {
   return order;
 };
 
-const getUserOrders = async (userId) => {
+export const getUserOrders = async (userId) => {
   const orders = await Order.find({ user: userId }).populate("products.product");
   if (!orders.length) {
     const error = new Error("No orders found");
@@ -45,7 +45,7 @@ const getUserOrders = async (userId) => {
   return orders;
 };
 
-const getOrderById = async (orderId, user) => {
+export const getOrderById = async (orderId, user) => {
   const order = await Order.findById(orderId).populate("products.product");
   if (!order) {
     const error = new Error("Order not found");
@@ -62,11 +62,11 @@ const getOrderById = async (orderId, user) => {
   return order;
 };
 
-const getAllOrders = async () => {
+export const getAllOrders = async () => {
   return await Order.find().populate("user").populate("products.product");
 };
 
-const updateOrderStatus = async (orderId, status) => {
+export const updateOrderStatus = async (orderId, status) => {
   const validStatuses = ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"];
   if (!validStatuses.includes(status)) {
     const error = new Error("Invalid status");
@@ -84,12 +84,4 @@ const updateOrderStatus = async (orderId, status) => {
   order.status = status;
   await order.save();
   return order;
-};
-
-module.exports = {
-  createOrder,
-  getUserOrders,
-  getOrderById,
-  getAllOrders,
-  updateOrderStatus
 };

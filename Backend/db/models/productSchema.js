@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const commonDescriptionFields = {
   BrandName: { type: String, required: true },
@@ -133,7 +133,5 @@ productSchema.pre("save", function (next) {
   next();
 });
 
-module.exports = {
-  Product: mongoose.model("Product", productSchema),
-  getDescriptionSchema
-};
+export const Product = mongoose.model("Product", productSchema);
+export { getDescriptionSchema };
