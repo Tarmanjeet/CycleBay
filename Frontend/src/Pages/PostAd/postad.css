@@ -145,7 +145,7 @@
     width: 100%;
     padding: 14px;
     background-color: var(--button-bg);
-    color: var(--profile-text);
+    color: var(--profile-bg);
     border: none;
     border-radius: 8px;
     cursor: pointer;

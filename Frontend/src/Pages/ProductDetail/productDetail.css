@@ -114,7 +114,7 @@
 
 .make-offer-btn {
     background-color: var(--button-bg);
-    color: var(--profile-text);
+    color: var(--profile-bg);
     border: none;
     padding: 12px 30px;
     font-size: 1.1rem;
@@ -290,7 +290,7 @@
     align-items: center;
     gap: 10px;
     background-color: var(--button-bg);
-    color: var(--profile-text);
+    color: var(--profile-bg);
     border: none;
     padding: 12px 25px;
     font-size: 1.1rem;
