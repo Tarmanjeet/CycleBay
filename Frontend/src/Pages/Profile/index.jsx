@@ -69,6 +69,10 @@ function Profile() {
         }
     };
 
+    const handleViewDetails = (productId) => {
+        navigate(`/product/${productId}`);
+    };
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         navigate('/signin');
@@ -218,10 +222,10 @@ function Profile() {
                                     <p>${product.price}</p>
                                     <div className="product-actions">
                                         <button 
-                                            className="edit-btn"
-                                            onClick={() => navigate(`/product/edit/${product._id}`)}
+                                            className="view-details-btn"
+                                            onClick={() => handleViewDetails(product._id)}
                                         >
-                                            Edit
+                                            View Details
                                         </button>
                                         <button 
                                             className="delete-btn"
