@@ -42,14 +42,18 @@ const SignIn = () => {
         const tokenParts = cleanToken.split('.');
         if (tokenParts.length === 3) {
           const payload = JSON.parse(atob(tokenParts[1]));
+          console.log('Token payload:', payload);
+          
+          // Store complete user data from token
           const userData = {
-            email: formData.email,
+            email: payload.email,
             userId: payload.userId,
-            type: payload.type || 'user'
+            type: payload.type || 'user',
+            name: payload.name || ''
           };
           
+          console.log('Storing user data:', userData);
           localStorage.setItem('user', JSON.stringify(userData));
-          console.log('Stored user data:', userData);
           
           window.dispatchEvent(new Event('authStateChange'));
           navigate('/', { replace: true }); 

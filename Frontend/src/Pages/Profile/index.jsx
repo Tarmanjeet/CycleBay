@@ -177,21 +177,9 @@ function Profile() {
                     <div className="profile-content-wrapper">
                         <div className="profile-image-section">
                             <div className="profile-image-container">
-                                <img 
-                                    src={userData.profileImage || "https://cdn-icons-png.flaticon.com/128/2102/2102633.png"} 
-                                    alt="Profile" 
-                                    className="profile-image"
-                                />
-                                <label htmlFor="profile-image-input" className="edit-image-btn">
-                                    Change Photo
-                                </label>
-                                <input 
-                                    type="file" 
-                                    id="profile-image-input" 
-                                    accept="image/*"
-                                    onChange={handleProfileImageChange}
-                                    style={{ display: 'none' }}
-                                />
+                                <div className="profile-avatar">
+                                    {userData.name ? userData.name.charAt(0).toUpperCase() : '?'}
+                                </div>
                             </div>
                         </div>
                         <div className="profile-info">

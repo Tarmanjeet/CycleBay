@@ -9,29 +9,34 @@ import { useTheme } from '../context/ThemeContext';
 function NavBar() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userEmail, setUserEmail] = useState('');
+    const [userName, setUserName] = useState('');
     const navigate = useNavigate();
     const { isDarkMode, toggleTheme } = useTheme();
 
     const checkAuth = () => {
         const token = localStorage.getItem('token');
-        const userData = localStorage.getItem('user');
-        const userEmail = localStorage.getItem('user.email');
         
         if (!token) {
             setIsLoggedIn(false);
             setUserEmail('');
+            setUserName('');
             return;
         }
         
         setIsLoggedIn(true);
         try {
-            if (userData) {
-                const user = JSON.parse(userData);
-                setUserEmail(user.email || '');
+            // Get user data from token
+            const tokenParts = token.split('.');
+            if (tokenParts.length === 3) {
+                const payload = JSON.parse(atob(tokenParts[1]));
+                console.log('Token payload:', payload);
+                setUserName(payload.name || '');
+                setUserEmail(payload.email || '');
             }
         } catch (error) {
-            console.error('Error parsing user data:', error);
+            console.error('Error parsing token:', error);
             setUserEmail('');
+            setUserName('');
         }
     };
 
@@ -51,6 +56,7 @@ function NavBar() {
         localStorage.removeItem('user');
         setIsLoggedIn(false);
         setUserEmail('');
+        setUserName('');
         window.dispatchEvent(new Event('authStateChange'));
         navigate('/');
     };
@@ -107,7 +113,16 @@ function NavBar() {
                                         <img className="messageIcon" src="https://cdn-icons-png.flaticon.com/128/134/134909.png" alt="Messages"></img>
                                     </span>
                                 </li>
-                                <DropdownButton id="dropdown-basic-button" title=<img className="profile-icon" src="https://cdn-icons-png.flaticon.com/128/2102/2102633.png"></img>>
+                                <DropdownButton 
+                                    id="dropdown-basic-button" 
+                                    title={
+                                        <>
+                                            <div className="nav-avatar">
+                                                {userName ? userName.charAt(0).toUpperCase() : '?'}
+                                            </div>
+                                        </>
+                                    }
+                                >
                                     <Dropdown.Item onClick={() => handleNavigation('/profile')}>Your Profile</Dropdown.Item>
                                     {/* <Dropdown.Item href="#/action-2">Your Ads</Dropdown.Item> */}
                                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
