@@ -11,7 +11,7 @@ const PostAd = () => {
     category: '',
     condition: 'new',
     stock: 1,
-    image: null,
+    imgUrl: '',
     description: {
       BrandName: '',
       DaysUsed: '',
@@ -88,45 +88,63 @@ const PostAd = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token");
-
-    const fd = new FormData();
-    fd.append("name", formData.name);
-    fd.append("price", Number(formData.price));
-    fd.append("desc", formData.desc);
-    fd.append("category", formData.category);
-    fd.append("stock", Number(formData.stock));
-    fd.append("image", formData.image); 
-    fd.append("description", JSON.stringify(formData.description));
-
     try {
-      const response = await axios.post("http://localhost:3000/product/create", fd, {
-        headers: {
-          "x-access-token": token,
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log("Product added:", response.data);
-      alert("Congratulation! Product was added successfully")
+      const token = localStorage.getItem('token');
+      if (!token) {
+        alert('Please login to create a product');
+        return;
+      }
 
-    // Reset form
-      setFormData({
-        name: '',
-        desc: '',
-        price: '',
-        category: '',
-        condition: 'new',
-        stock: 1,
-        image: null,
-        description: {
-          BrandName: '',
-          DaysUsed: '',
-          Condition: 'New',
-          color: ''
+      if (!formData.image) {
+        alert('Please select an image file');
+        return;
+      }
+
+      const fd = new FormData();
+      fd.append('name', formData.name);
+      fd.append('desc', formData.desc);
+      fd.append('price', Number(formData.price));
+      fd.append('category', formData.category);
+      fd.append('image', formData.image);
+      fd.append('description', JSON.stringify({
+        ...formData.description,
+        DaysUsed: Number(formData.description.DaysUsed)
+      }));
+
+      const response = await axios.post('http://localhost:3000/product/create', fd, {
+        headers: {
+          'x-access-token': token,
+          'Content-Type': 'multipart/form-data'
         }
       });
-      } catch (error) {
-      console.error("Error submitting form:", error);
+
+      if (response.data.success) {
+        alert('Product created successfully!');
+        setFormData({
+          name: '',
+          desc: '',
+          price: '',
+          category: '',
+          condition: 'new',
+          stock: 1,
+          image: null,
+          description: {
+            BrandName: '',
+            DaysUsed: '',
+            Condition: 'New',
+            color: ''
+          }
+        });
+      } else {
+        alert(response.data.message || 'Failed to create product');
+      }
+    } catch (error) {
+      console.error('Error details:', error.response || error);
+      if (error.response?.status === 401) {
+        alert('Please login to create a product');
+      } else {
+        alert('Error creating product: ' + (error.response?.data?.message || error.message));
+      }
     }
   };
 
@@ -135,7 +153,7 @@ const PostAd = () => {
     return fields.map(({ label, name, type, options }) => (
       <div key={name}>
         <label>{label}:</label>
-        {type === 'select' ? (
+        {type == 'select' ? (
           <select name={name} value={formData.description[name] || ''} onChange={handleChange} required>
             <option value="">Select</option>
             {options.map(option => (
@@ -159,8 +177,7 @@ const PostAd = () => {
     <div className="post-ad-page">
       <NavBar />
       <div className="post-ad-container">
-        <h1>POST YOUR AD<img src="https://cdn-icons-png.flaticon.com/128/1154/1154448.png" alt="Post Ad" />
-</h1>
+        <h1>POST YOUR AD</h1>
         <form className="post-ad-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Product Name</label>
@@ -233,5 +250,4 @@ const PostAd = () => {
     </div>
   );
 };
-
-export default PostAd; 
+export default PostAd;

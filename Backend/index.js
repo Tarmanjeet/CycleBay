@@ -21,11 +21,15 @@ const app = express();
 
 app.use(cors({
     origin: '*',
-    methods: ['GET', 'POST', 'DELETE', 'PUT'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token']
+    methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'x-access-token'],
+    exposedHeaders: ['Content-Range', 'X-Content-Range']
 }));
 
-app.use(bodyParser.json());
+// Increase payload size limit for file uploads
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
 app.use("/user", userRouter);
 app.use("/product", productRouter);
 app.use("/order", orderRouter);
@@ -33,6 +37,17 @@ app.use("/wishlist", wishlistRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use('/offer', offerRoutes);
 app.use('/message', messageRouter);
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ 
+        success: false, 
+        message: 'Something broke!',
+        error: err.message 
+    });
+});
+
 app.use((req, res) => {
     res.status(404).sendFile(path.join(__dirname, "/404.html"));
 });

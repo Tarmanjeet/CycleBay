@@ -96,34 +96,32 @@
 
 .view-details-btn, .delete-btn {
     flex: 1;
-    padding: 0.5rem;
+    padding: 0.8rem;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     font-weight: 600;
-<<<<<<< HEAD
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
 }
 
-.view-details-btn {
-=======
-    transition: all 0.3s;
->>>>>>> 1db13390fa3816a80f062a10c31dad5621ec3edb
+.view-details-btn, .delete-btn {
     background-color: var(--button-bg);
     color: var(--profile-bg);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.delete-btn {
-    background-color: var(--button-bg);
-    color: var(--profile-bg);
-}
-
-.view-details-btn:hover {
+.view-details-btn:hover, .delete-btn:hover {
     background-color: var(--button-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.delete-btn:hover {
-    background-color: var(--button-hover);
+.view-details-btn:active, .delete-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .no-products {
@@ -161,98 +159,6 @@
     margin: 1rem 0;
 }
 
-/* Edit Modal Styles */
-.edit-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.edit-modal-content {
-    background-color: var(--card-background);
-    padding: 2rem;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 500px;
-    max-height: 90vh;
-    overflow-y: auto;
-}
-
-.edit-modal-content h2 {
-    color: var(--text-color);
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-    font-weight: 600;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: var(--input-bg);
-    color: var(--input-text);
-}
-
-.form-group textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.modal-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-}
-
-.save-btn,
-.cancel-btn {
-    flex: 1;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.save-btn {
-    background-color: var(--button-bg);
-    color: var(--profile-text);
-}
-
-.cancel-btn {
-    background-color: var(--button-bg);
-    color: var(--profile-text);
-}
-
-.save-btn:hover {
-    background-color: var(--button-hover);
-}
-
-.cancel-btn:hover {
-    background-color: var(--button-hover);
-}
-
 @media (max-width: 768px) {
     .manage-products-container {
         padding: 1rem;
@@ -279,10 +185,5 @@
     .Products-Card .description {
         font-size: 0.85rem;
         -webkit-line-clamp: 2;
-    }
-
-    .edit-modal-content {
-        width: 95%;
-        padding: 1.5rem;
     }
 } 

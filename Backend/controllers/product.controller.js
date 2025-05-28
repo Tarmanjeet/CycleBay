@@ -57,19 +57,50 @@ const getProductById = async (req, res) => {
 
 const createProduct = async (req, res) => {
   try {
-    const imageFileName = req.file ? req.file.filename : null;
+    if (!req.file) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Image file is required" 
+      });
+    }
+
+    const imageFileName = req.file.filename;
+    let description;
+    
+    try {
+      description = JSON.parse(req.body.description);
+    } catch (err) {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Invalid description format" 
+      });
+    }
 
     const productData = {
       ...req.body,
       image: imageFileName,
-      description: JSON.parse(req.body.description), 
+      description
     };
 
     const product = await createProductService(productData, req.user.userId);
-    res.status(201).json(product);
+    res.status(201).json({ 
+      success: true, 
+      message: "Product created successfully",
+      data: product 
+    });
   } catch (error) {
     console.error("create product error:", error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    if (error.name === 'ValidationError') {
+      return res.status(400).json({ 
+        success: false, 
+        message: "Validation error", 
+        errors: error.errors 
+      });
+    }
+    res.status(500).json({ 
+      success: false, 
+      message: error.message || "Server Error" 
+    });
   }
 };
 
