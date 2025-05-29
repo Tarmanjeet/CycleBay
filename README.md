@@ -58,7 +58,7 @@ A MERN stack-powered web application that promotes sustainability through a peer
 
 2. **Clone Your Fork**
    ```
-   git clone https://github.com/Tarmanjeet/CycleBay.git
+   git clone https://github.com/your-username/CycleBay.git
    
    cd CycleBay
    ```
