@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState , useRef } from 'react';
 import NavBar from '../../Components/NavBar';
 import axios from 'axios';
 import './postAd.css';
 
 const PostAd = () => {
+  const fileInputRef = useRef();
   const [formData, setFormData] = useState({
     name: '',
     desc: '',
@@ -135,6 +136,9 @@ const PostAd = () => {
             color: ''
           }
         });
+        if (fileInputRef.current) {
+          fileInputRef.current.value = '';
+        }
       } else {
         alert(response.data.message || 'Failed to create product');
       }
@@ -199,7 +203,8 @@ const PostAd = () => {
             <input type="file"
               name="image"
               accept="image/*"
-              onChange={(e) => setFormData(prev => ({ ...prev, image: e.target.files[0] }))}
+              onChange={(e) => setFormData({ ...formData, image: e.target.files[0] })}
+              ref={fileInputRef}
               required
             />
           </div>
