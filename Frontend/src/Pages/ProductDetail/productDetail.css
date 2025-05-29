@@ -285,34 +285,6 @@
     flex: 1;
 }
 
-.chat-seller-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: var(--button-bg);
-    color: var(--profile-bg);
-    border: none;
-    padding: 12px 25px;
-    font-size: 1.1rem;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    box-shadow: 0 2px 8px var(--shadow-color);
-}
-
-.chat-seller-btn img {
-    width: 24px;
-    height: 24px;
-    filter: brightness(0) invert(1);
-}
-
-.chat-seller-btn:hover {
-    background-color: var(--button-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--shadow-color);
-}
-
 @media (max-width: 768px) {
     .product-container {
         padding: 20px 0;

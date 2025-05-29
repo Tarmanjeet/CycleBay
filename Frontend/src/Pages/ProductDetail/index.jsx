@@ -165,10 +165,6 @@ function ProductDetail() {
                     <span className="info-value">{new Date(product.createdAt).toLocaleDateString()}</span>
                   </div>
                 </div>
-                <button className="chat-seller-btn">
-                  <img src="https://cdn-icons-png.flaticon.com/128/134/134914.png" alt="chat" />
-                  Chat with Seller
-                </button>
               </div>
             </div>
           </div>

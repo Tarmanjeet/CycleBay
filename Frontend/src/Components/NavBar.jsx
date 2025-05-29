@@ -52,6 +52,7 @@ function NavBar() {
     }, []);
 
     const handleLogout = () => {
+        alert("Are you sure to logout?")
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         setIsLoggedIn(false);
@@ -96,7 +97,7 @@ function NavBar() {
                             aria-label="Toggle theme"
                         >
                             <img 
-                                src="https://cdn-icons-png.flaticon.com/128/8051/8051743.png"
+                                src="https://cdn-icons-png.flaticon.com/128/5261/5261287.png"
                                 alt="Theme Toggle"
                             />
                         </button>
@@ -105,12 +106,7 @@ function NavBar() {
                                 <li>
                                     <span 
                                         onClick={() => handleNavigation('/likedProducts')}>
-                                        <img className="likedIcon" src="https://cdn-icons-png.flaticon.com/128/2332/2332042.png"></img>
-                                    </span>
-                                </li>
-                                <li>
-                                    <span onClick={() => handleNavigation('/messages')}>
-                                        <img className="messageIcon" src="https://cdn-icons-png.flaticon.com/128/134/134909.png" alt="Messages"></img>
+                                        <img className="likedIcon" src="https://cdn-icons-png.flaticon.com/128/5735/5735325.png"></img>
                                     </span>
                                 </li>
                                 <DropdownButton 
