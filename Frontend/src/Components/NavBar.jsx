@@ -78,7 +78,7 @@ function NavBar() {
                     <ul className="nav-left">
                         <li className="logo-container">
                             <Link to="/">
-                                <img src={logo} alt="CycleBay Logo" className="nav-logo" />
+                                <img src="https://cdn-icons-png.flaticon.com/128/8787/8787157.png" alt="CycleBay Logo" className="nav-logo" />
                             </Link>
                         </li>
                         <li><Link to="/">Home</Link></li>
