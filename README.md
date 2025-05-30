@@ -2,24 +2,25 @@
 
 A MERN stack-powered web application that promotes sustainability through a peer-to-peer marketplace for refurbished, second-hand, or upcycled goods. Users can list, browse, and trade eco-friendly items, encouraging the reuse and recycling of products.
 
+# [Click Here to View Live](https://taupe-scone-41941e.netlify.app/)
 
 ## ✨ Features
 
 ### Frontend (React.js)
 - Landing Page (Public, no auth required)
-- Authentication Flow: Signup, Login, Forgot Password
+- Authentication Flow: Signup, Login
 - Responsive Design with consistent theming
 - Form Validation + Loading/Error States
 - Route Protection for private pages
 - Bookmarks/Favorites functionality
-- Advanced Filters (category, price, tags)
-- Sort Options (price, date, rating)
+- Advanced Filters (category, price)
+- Sort Options 
 - Dark Mode toggle
 - Multi-step Forms for item listing & checkout
 - Suggestions & Related Listings
 - Notifications
 - User Profile Page
-- Chat System with seller
+
 
 ### Backend (Node.js + Express.js + MongoDB)
 - REST API with full CRUD operations
@@ -30,7 +31,7 @@ A MERN stack-powered web application that promotes sustainability through a peer
 - Image uploads via Multer 
 - MongoDB schemas
 - Environment configuration via .env
-- Optional real-time features with Socket.io
+
 
 ## 🛠 Tech Stack
 
