@@ -2,7 +2,7 @@
 
 A MERN stack-powered web application that promotes sustainability through a peer-to-peer marketplace for refurbished, second-hand, or upcycled goods. Users can list, browse, and trade eco-friendly items, encouraging the reuse and recycling of products.
 
-# [Click Here to View Live](https://taupe-scone-41941e.netlify.app/)
+ [Click Here to View Live](https://taupe-scone-41941e.netlify.app/)
 
 ## ✨ Features
 
