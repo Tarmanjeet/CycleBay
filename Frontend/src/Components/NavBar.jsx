@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import './NavBar.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
-import logo from '../assets/images/logo1.png';
 import { useTheme } from '../context/ThemeContext';
 
 function NavBar() {
@@ -25,7 +24,6 @@ function NavBar() {
         
         setIsLoggedIn(true);
         try {
-            // Get user data from token
             const tokenParts = token.split('.');
             if (tokenParts.length === 3) {
                 const payload = JSON.parse(atob(tokenParts[1]));
@@ -120,7 +118,6 @@ function NavBar() {
                                     }
                                 >
                                     <Dropdown.Item onClick={() => handleNavigation('/profile')}>Your Profile</Dropdown.Item>
-                                    {/* <Dropdown.Item href="#/action-2">Your Ads</Dropdown.Item> */}
                                     <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                                 </DropdownButton>
                                 <span className="user-email">{userEmail}</span>

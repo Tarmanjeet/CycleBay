@@ -193,7 +193,7 @@ const unlikeProduct = async (req, res) => {
 const getProductsByUserId = async (req, res) => {
   try {
     console.log("Fetching products for user:", req.params.userId);
-    console.log("User from token:", req.user); // Log the user object from token
+    console.log("User from token:", req.user); 
     
     if (!req.params.userId) {
       console.log("No userId provided in params");

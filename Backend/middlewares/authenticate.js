@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 
-
 const tokenSecret = process.env.TOKEN_SECRET || 'cyclebay_secure_jwt_secret_key_2024';
 
 export const isAuth = (req, res, next) => {

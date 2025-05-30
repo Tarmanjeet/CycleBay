@@ -2,7 +2,6 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { User } from "../db/models/userSchema.js";
 
-// Use a consistent fallback secret if environment variable is not set
 const tokenSecret = process.env.TOKEN_SECRET || 'cyclebay_secure_jwt_secret_key_2024';
 
 const registerUserService = async (body) => {

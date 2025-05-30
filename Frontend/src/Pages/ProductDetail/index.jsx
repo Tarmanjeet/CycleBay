@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react'
 import NavBar from '../../Components/NavBar'
-//import {jwtDecode} from 'jwt-decode'
 import {useParams} from 'react-router-dom'
 import './productDetail.css'
 

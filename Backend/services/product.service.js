@@ -1,6 +1,5 @@
 import { Product, getDescriptionSchema } from "../db/models/productSchema.js";
 import mongoose from "mongoose";
-import path from "path";
 
 const getAllProductsService = async (
   filters = {},

@@ -34,8 +34,7 @@ const SignIn = () => {
       
       if (response.data.success && response.data.token) {
         const { token } = response.data;
-        
-        // Ensure token is properly formatted before storing
+
         const cleanToken = token.trim();
         localStorage.setItem('token', cleanToken);
         
@@ -44,7 +43,6 @@ const SignIn = () => {
           const payload = JSON.parse(atob(tokenParts[1]));
           console.log('Token payload:', payload);
           
-          // Store complete user data from token
           const userData = {
             email: payload.email,
             userId: payload.userId,
