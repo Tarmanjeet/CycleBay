@@ -119,7 +119,6 @@ let productSchema = new mongoose.Schema({
 });
 
 productSchema.pre("save", function (next) {
-  // Skip validation if only likedBy array is being modified
   if (this.isModified('likedBy') && Object.keys(this.modifiedPaths()).length === 1) {
     return next();
   }

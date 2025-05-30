@@ -17,7 +17,6 @@ A MERN stack-powered web application that promotes sustainability through a peer
 - Sort Options 
 - Dark Mode toggle
 - Multi-step Forms for item listing & checkout
-- Suggestions & Related Listings
 - Notifications
 - User Profile Page
 
