@@ -21,7 +21,7 @@ function LikedProducts() {
                 return;
             }
 
-            const response = await fetch('http://localhost:3000/product', {
+            const response = await fetch('https://cyclebay-backend.onrender.com/product', {
                 headers: {
                     'x-access-token': token
                 }
@@ -62,7 +62,7 @@ function LikedProducts() {
                 return;
             }
 
-            const response = await fetch(`http://localhost:3000/product/unlike/${productId}`, {
+            const response = await fetch(`https://cyclebay-backend.onrender.com/product/unlike/${productId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ function LikedProducts() {
                         {likedProducts.map((product) => (
                             <div key={product._id} className="Products-Card" onClick={() => productClick(product._id)}>
                                 <img 
-                                    src={`http://localhost:3000/uploads/${product.image}`}
+                                    src={`https://cyclebay-backend.onrender.com/uploads/${product.image}`}
                                     alt={product.name} 
                                 />
                                 <h3>{product.name}</h3>

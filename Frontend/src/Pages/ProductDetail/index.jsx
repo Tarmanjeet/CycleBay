@@ -13,7 +13,7 @@ function ProductDetail() {
   useEffect(() => {
     const fetchProductDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/product/${id}`)
+        const response = await fetch(`https://cyclebay-backend.onrender.com/product/${id}`)
         if(!response.ok)throw new Error("Failed to fetch product details")
         const result = await response.json()
 
@@ -59,7 +59,7 @@ function ProductDetail() {
     }
 
     try {
-      const response = await fetch('http://localhost:3000/offer/send-offer', {
+      const response = await fetch('https://cyclebay-backend.onrender.com/offer/send-offer', {
         method: 'POST',
         headers: { 
           'x-access-token': token,
@@ -121,7 +121,7 @@ function ProductDetail() {
       <div className="product-container">
         <div className="content-wrapper">
           <div className="image-wrapper">
-            <img src={`http://localhost:3000/uploads/${product.image}`} alt={product.name} className="product-image" />
+            <img src={`https://cyclebay-backend.onrender.com/uploads/${product.image}`} alt={product.name} className="product-image" />
           </div>
 
           <div className="info-box">

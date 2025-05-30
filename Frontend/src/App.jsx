@@ -11,7 +11,6 @@ import About from './Pages/About'
 import Sell from './Pages/Sell'
 import ProductDetail from './Pages/ProductDetail'
 import PostAd from './Pages/PostAd'
-import Messages from './Pages/Messages/Messages'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ManageProducts from './Pages/ManageProducts'
 import { ThemeProvider } from './context/ThemeContext'
@@ -19,7 +18,7 @@ import Footer from './Components/Footer'
 
 function AppContent() {
   const location = useLocation();
-  const hideFooterPaths = ['/signin', '/signup', '/messages'];
+  const hideFooterPaths = ['/signin', '/signup'];
   const shouldShowFooter = !hideFooterPaths.includes(location.pathname);
 
   return (
@@ -35,7 +34,6 @@ function AppContent() {
         <Route path="/product/:id" element={<ProductDetail/>}/>
         <Route path="/post-ad" element={<PostAd/>} />
         <Route path="/manage-products" element={<ManageProducts/>} />
-        <Route path="/messages" element={<Messages/>} />
       </Routes>
       {shouldShowFooter && <Footer />}
     </div>

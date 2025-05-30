@@ -112,7 +112,7 @@ const PostAd = () => {
         DaysUsed: Number(formData.description.DaysUsed)
       }));
 
-      const response = await axios.post('http://localhost:3000/product/create', fd, {
+      const response = await axios.post('https://cyclebay-backend.onrender.com/product/create', fd, {
         headers: {
           'x-access-token': token,
           'Content-Type': 'multipart/form-data'

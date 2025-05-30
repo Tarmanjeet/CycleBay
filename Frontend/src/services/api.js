@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'https://cyclebay-backend.onrender.com/';
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -18,7 +18,6 @@ api.interceptors.request.use((config) => {
 });
 
 export const profileAPI = {
-    getWishlist: () => api.get('/wishlist'),
     getUserProducts: (userId) => api.get(`/product/user/${userId}`),
     deleteProduct: (productId) => api.delete(`/product/delete/${productId}`),
 };

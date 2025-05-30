@@ -28,7 +28,7 @@ const ManageProducts = () => {
         return;
       }
 
-      const response = await axios.get(`http://localhost:3000/product/user/${userId}`, {
+      const response = await axios.get(`https://cyclebay-backend.onrender.com/product/user/${userId}`, {
         headers: {
           'x-access-token': token
         }
@@ -61,7 +61,7 @@ const ManageProducts = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.delete(`http://localhost:3000/product/delete/${productId}`, {
+      const response = await axios.delete(`https://cyclebay-backend.onrender.com/product/delete/${productId}`, {
         headers: {
           'x-access-token': token
         }
@@ -133,7 +133,7 @@ const ManageProducts = () => {
             {products.map(product => (
               <div key={product._id} className="Products-Card">
                 <img 
-                  src={`http://localhost:3000/uploads/${product.image}`} 
+                  src={`https://cyclebay-backend.onrender.com/uploads/${product.image}`} 
                   alt={product.name}
                 />
                 <h3>{product.name}</h3>

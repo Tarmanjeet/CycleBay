@@ -22,7 +22,7 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3000/user/register', formData);
+      const response = await axios.post('https://cyclebay-backend.onrender.com/user/register', formData);
       if (response.status === 200) {
         console.log('Response:', response.data);
         alert('User registered successfully');

@@ -27,7 +27,7 @@ function Home() {
                 }
                 if (searchTerm) params.append("search", searchTerm);
 
-                const response = await fetch(`http://localhost:3000/product?${params.toString()}`);
+                const response = await fetch(`https://cyclebay-backend.onrender.com/product?${params.toString()}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch products');
                 }
@@ -81,7 +81,7 @@ function Home() {
             const isLiked = product.isLiked;
             const endpoint = isLiked ? 'unlike' : 'like';
             
-            const response = await fetch(`http://localhost:3000/product/${endpoint}/${productId}`, {
+            const response = await fetch(`https://cyclebay-backend.onrender.com/product/${endpoint}/${productId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -170,7 +170,7 @@ function Home() {
                             <div key={index} className="Products-Card"
                               onClick={()=>productClick(product._id)}>
                                 <img 
-                                    src={`http://localhost:3000/uploads/${product.image}`}
+                                    src={`https://cyclebay-backend.onrender.com/uploads/${product.image}`}
                                     alt={product.name} 
                                 />
                                 <h3>{product.name}</h3>

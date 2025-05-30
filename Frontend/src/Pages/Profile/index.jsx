@@ -73,62 +73,6 @@ function Profile() {
         navigate(`/product/${productId}`);
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        navigate('/signin');
-    };
-
-    const handleProfileImageChange = async (event) => {
-        const file = event.target.files[0];
-        if (!file) return;
-
-       
-        if (!file.type.startsWith('image/')) {
-            alert('Please select an image file');
-            return;
-        }
-
-    
-        if (file.size > 5 * 1024 * 1024) {
-            alert('Image size should be less than 5MB');
-            return;
-        }
-
-        try {
-            setLoading(true);
-            const formData = new FormData();
-            formData.append('profileImage', file);
-
-            const token = localStorage.getItem('token');
-            const response = await fetch('http://localhost:3000/user/update-profile-image', {
-                method: 'POST',
-                headers: {
-                    'x-access-token': token
-                },
-                body: formData
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to update profile image');
-            }
-
-            const result = await response.json();
-            if (result.success) {
-                setUserData(prev => ({
-                    ...prev,
-                    profileImage: result.data.profileImage
-                }));
-            } else {
-                throw new Error(result.message || 'Failed to update profile image');
-            }
-        } catch (err) {
-            console.error('Error updating profile image:', err);
-            alert(err.message || 'Failed to update profile image');
-        } finally {
-            setLoading(false);
-        }
-    };
-
     if (loading) {
         return (
             <div className="profile-container">
@@ -205,7 +149,7 @@ function Profile() {
                         {userProducts.length > 0 ? (
                             userProducts.map(product => (
                                 <div key={product._id} className="listing-card">
-                                    <img src={`http://localhost:3000/uploads/${product.image}`} alt={product.name} />
+                                    <img src={`https://cyclebay-backend.onrender.com/uploads/${product.image}`} alt={product.name} />
                                     <h3>{product.name}</h3>
                                     <p>${product.price}</p>
                                     <div className="product-actions">
